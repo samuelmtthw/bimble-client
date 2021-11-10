@@ -29,19 +29,16 @@ nav {
   background-color: #a3d2ca;
 }
 
-h1 {
+nav h1 {
   font-weight: 800;
   font-style: italic;
   color: #eb5e0b;
 }
 
-h6 {
+nav h6 {
   font-weight: 400;
 }
 
-.wrapper {
-  margin: 20px 36px;
-}
 .navLinks {
   margin-top: 3px;
 }
@@ -52,6 +49,6 @@ h6 {
 }
 .navLinks a:hover {
   cursor: pointer;
-  border-bottom: 3px solid #5eaaa8;
+  border-bottom: 3px solid #eb5e0b;
 }
 </style>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@/apis/server.js";
 import Vue from "vue";
 import Vuex from "vuex";
 
