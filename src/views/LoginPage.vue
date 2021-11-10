@@ -25,23 +25,21 @@ export default {
     };
   },
   methods: {
-    login() {
-      const payload = {
-        email: this.email,
-        password: this.password,
-      };
-
-      this.$store
-        .dispatch("login", payload)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      console.log(payload);
-    },
+    // login() {
+    //   const payload = {
+    //     email: this.email,
+    //     password: this.password,
+    //   };
+    //   this.$store
+    //     .dispatch("login", payload)
+    //     .then((result) => {
+    //       console.log(result);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    //   console.log(payload);
+    // },
   },
 };
 </script>

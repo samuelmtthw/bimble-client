@@ -1,36 +1,57 @@
 <template>
-  <!-- <div
-    class="
-      d-flex
-      flex-column flex-md-row
-      align-items-center
-      pb-3
-      mb-4
-      border-bottom
-    "
-  >
-    <a
-      href="/"
-      class="d-flex align-items-center text-dark text-decoration-none"
-    >
-      <span class="fs-4">Bejol</span>
-    </a>
-
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      <a class="me-3 py-2 text-dark text-decoration-none">Home</a>
-      <a class="me-3 py-2 text-dark text-decoration-none">Courses</a>
-      <a class="me-3 py-2 text-dark text-decoration-none">My Course</a>
-      <a class="me-3 py-2 text-dark text-decoration-none">Login</a>
-      <a class="py-2 text-dark text-decoration-none">Logout</a>
-    </nav>
-  </div> -->
-  <h1>navbar</h1>
+  <nav class="d-flex justify-content-center">
+    <div class="wrapper d-flex justify-content-between align-items-center">
+      <router-link to="/"><h1>BIMBLE</h1></router-link>
+      <div class="navLinks d-flex flex-row">
+        <router-link to="/"><h6>Home</h6></router-link>
+        <router-link to="/courses"><h6>Courses</h6></router-link>
+        <router-link to="/my-courses"><h6>My Courses</h6></router-link>
+        <router-link to="/login"><h6>Log In</h6></router-link>
+        <a @click.prevent="logout"><h6>Log Out</h6></a>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
 export default {
   name: "NavBar",
+  methods: {
+    logout() {
+      localStorage.removeItem("access_token");
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+nav {
+  background-color: #a3d2ca;
+}
+
+h1 {
+  font-weight: 800;
+  font-style: italic;
+  color: #eb5e0b;
+}
+
+h6 {
+  font-weight: 400;
+}
+
+.wrapper {
+  margin: 20px 36px;
+}
+.navLinks {
+  margin-top: 3px;
+}
+
+.navLinks a {
+  margin-left: 20px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0);
+}
+.navLinks a:hover {
+  cursor: pointer;
+  border-bottom: 3px solid #5eaaa8;
+}
+</style>
