@@ -5,9 +5,19 @@
         <form @submit.prevent="login" class="d-flex flex-column">
           <h2 class="mb-5">Log In</h2>
           <label><span>E-mail</span></label>
-          <input type="email" v-model="email" class="form-control mb-3" />
+          <input
+            type="email"
+            v-model="email"
+            placeholder="john@mail.com"
+            class="form-control mb-3"
+          />
           <label><span>Password</span></label>
-          <input type="password" v-model="password" class="form-control mb-4" />
+          <input
+            type="password"
+            v-model="password"
+            placeholder="********"
+            class="form-control mb-4"
+          />
 
           <input type="submit" value="Log In" class="form-control btn mt-3" />
           <span class="my-1 text-muted text-center">or</span>
@@ -72,6 +82,7 @@ export default {
   font-weight: 700;
   font-style: italic;
 }
+
 #LoginPage .btn:hover {
   background-color: #8fcac0;
 }

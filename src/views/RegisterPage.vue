@@ -1,18 +1,41 @@
 <template>
-  <section>
-    <div class="card bg-primary">
-      <form v-on:submit.prevent="registerRequest">
-        <h1>Register</h1>
-        <label>Username</label>
-        <input type="text" v-model="username" />
-        <label>E-mail</label>
-        <input type="email" v-model="email" />
-        <label>Password</label>
-        <input type="password" v-model="password" />
+  <section
+    id="RegisterPage"
+    class="stationary-page d-flex justify-content-center"
+  >
+    <div class="wrapper d-flex justify-content-center">
+      <div class="card p-5 rounded">
+        <form @submit.prevent="register" class="d-flex flex-column">
+          <h2 class="mb-5">Register</h2>
+          <label><span>Username</span></label>
+          <input
+            type="text"
+            v-model="username"
+            placeholder="John Doe"
+            class="form-control mb-3"
+          />
+          <label><span>E-mail</span></label>
+          <input
+            type="email"
+            v-model="email"
+            placeholder="john@mail.com"
+            class="form-control mb-3"
+          />
+          <label><span>Password</span></label>
+          <input
+            type="password"
+            v-model="password"
+            placeholder="********"
+            class="form-control mb-4"
+          />
 
-        <input type="submit" value="Register" />
-        <!-- <button>Register with google</button> -->
-      </form>
+          <input type="submit" value="Register" class="form-control my-3 btn" />
+          <small class="text-center text-muted"
+            >Have an account?
+            <router-link to="/login">Log in</router-link>
+          </small>
+        </form>
+      </div>
     </div>
   </section>
 </template>
@@ -41,4 +64,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#RegisterPage .card {
+  min-width: 600px;
+}
+
+#RegisterPage span {
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+
+#RegisterPage .btn {
+  background-color: #a3d2ca;
+  color: #eb5e0b;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+#RegisterPage .btn:hover {
+  background-color: #8fcac0;
+}
+</style>
