@@ -31,6 +31,6 @@ a {
 .stationary-page {
   width: 100vw;
 
-  /* min-height: calc(100vh - 96px); */
+  min-height: calc(100vh - 160px);
   padding: 20px 0;
 }

@@ -19,6 +19,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem("access_token");
+      this.$router.push("/");
     },
   },
 };
@@ -30,7 +31,7 @@ nav {
 }
 
 nav h1 {
-  font-weight: 800;
+  font-weight: 900;
   font-style: italic;
   color: #eb5e0b;
 }
