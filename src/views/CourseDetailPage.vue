@@ -8,16 +8,15 @@
         <div class="col-2">
           <h3>{{ course.name }}</h3>
           <strong>Rp. {{ course.price }}</strong> <br />
-          <button class="btn mt-4">Purchase Now</button>
+          <button class="btn mt-4" @click="addUserCourseUser">
+            Purchase Now
+          </button>
         </div>
-        <div class="col-8">
-          <div class="vidContainer">
-            <iframe :src="course.Videos[0].videoUrl" frameborder="0" />
-          </div>
-        </div>
-        <div class="col-2">
-          <strong>Description</strong>
+        <div class="col-10">
+          <iframe :src="course.Videos[0].videoUrl" frameborder="0" />
+          <br />
           <hr />
+          <strong class="d-block mb-3">Description</strong>
           <p>{{ course.description }}</p>
         </div>
       </div>
@@ -59,8 +58,22 @@ export default {
           this.course = result;
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
         });
+    },
+    addUserCourseUser() {
+      console.log(this.course.id);
+      this.$router.push(`/buy/${this.course.id}`);
+
+      // this.$store
+      //   .dispatch("addUserCourseUser", { courseId: this.course.id })
+      //   .then((result) => {
+      //     console.log(result);
+      //     this.$router.push(`/buy/${this.course.id}`);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
     },
   },
   created() {
@@ -86,13 +99,9 @@ export default {
   font-size: 1.3em;
 }
 
-#CourseDetail .vidContainer {
-  min-height: 100%;
-}
-
-#CourseDetail .vidContainer iframe {
-  width: 100%;
-  height: 500px;
+#CourseDetail iframe {
+  width: 900px;
+  height: 524px;
 }
 
 #CourseDetail .btn {

@@ -7,6 +7,8 @@
         <router-link to="/courses"><h6>Courses</h6></router-link>
         <router-link to="/my-courses"><h6>My Courses</h6></router-link>
         <router-link to="/login"><h6>Log In</h6></router-link>
+        <router-link to="/admin"><h6>Admin</h6></router-link>
+        <router-link to="/profile"><h6>Profile</h6></router-link>
         <a @click.prevent="logout"><h6>Log Out</h6></a>
       </div>
     </div>

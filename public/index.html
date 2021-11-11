@@ -23,9 +23,14 @@
     />
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Bimble</title>
   </head>
   <body>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
     <noscript>
       <strong
         >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
@@ -35,11 +40,5 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-
-    <!-- AOS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
   </body>
 </html>

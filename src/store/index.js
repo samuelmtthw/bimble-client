@@ -88,7 +88,7 @@ export default new Vuex.Store({
           });
       });
     },
-    // TODO
+    // * done
     fetchCoursesDetailUser(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -137,7 +137,7 @@ export default new Vuex.Store({
     addUserCourseUser(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
-          method: "GET",
+          method: "POST",
           url: `/public/user-courses/${courseId}`,
           headers: localStorage.getItem("access_token"),
         })

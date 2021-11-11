@@ -4,9 +4,12 @@ import HomePage from "@/views/HomePage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import CoursesPage from "@/views/CoursesPage.vue";
+import ProfilePage from "@/views/ProfilePage.vue";
 import MyCoursesPage from "@/views/MyCoursesPage.vue";
 import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
+import AdminPage from "@/views/AdminPage.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -36,6 +39,11 @@ const routes = [
     component: RegisterPage,
   },
   {
+    path: "/profile",
+    name: "Profile",
+    component: ProfilePage,
+  },
+  {
     path: "/my-courses",
     name: "MyCourses",
     component: MyCoursesPage,
@@ -44,6 +52,11 @@ const routes = [
     path: "/buy/:courseId",
     name: "BuyPage",
     component: BuyPage,
+  },
+  {
+    path: "/admin",
+    name: "AdminPage",
+    component: AdminPage,
   },
 ];
 
