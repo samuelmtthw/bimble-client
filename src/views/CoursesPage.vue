@@ -45,7 +45,8 @@
               name="orderBy"
               value="price"
               v-model="name"
-              class="form-control"
+              class="form-control mb-3"
+              placeholder="Course Name"
             />
           </div>
           <input type="submit" class="form-control mb-1" value="Search" />
@@ -192,6 +193,9 @@ export default {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
+}
+#CoursesPage input[type="submit"]:hover {
+  background-color: #dd5608;
 }
 
 #CoursesPage button {

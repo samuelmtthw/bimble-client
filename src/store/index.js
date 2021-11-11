@@ -9,6 +9,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {
     // ! =========  Customer =========
+    // * done
     loginUser(context, { email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -24,6 +25,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     registerUser(context, { name, email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -86,6 +88,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // TODO
     fetchCoursesDetailUser(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
