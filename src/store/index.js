@@ -70,12 +70,13 @@ export default new Vuex.Store({
           });
       });
     },
-    // fetch all courses
-    fetchCoursesUser() {
+    // * done
+    fetchCoursesUser(context, { categoryId, orderBy, name, page }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: "/public/courses",
+          params: { categoryId, orderBy, name, page },
         })
           .then(({ data }) => {
             resolve(data);

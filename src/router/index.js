@@ -16,6 +16,16 @@ const routes = [
     component: HomePage,
   },
   {
+    path: "/courses",
+    name: "Courses",
+    component: CoursesPage,
+  },
+  {
+    path: "/courses/:courseId",
+    name: "CourseDetail",
+    component: CourseDetailPage,
+  },
+  {
     path: "/login",
     name: "Login",
     component: LoginPage,
@@ -26,19 +36,9 @@ const routes = [
     component: RegisterPage,
   },
   {
-    path: "/courses",
-    name: "Courses",
-    component: CoursesPage,
-  },
-  {
     path: "/my-courses",
     name: "MyCourses",
     component: MyCoursesPage,
-  },
-  {
-    path: "/courses/:courseId",
-    name: "CourseDetail",
-    component: CourseDetailPage,
   },
   {
     path: "/buy/:courseId",
