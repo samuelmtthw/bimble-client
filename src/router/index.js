@@ -9,6 +9,7 @@ import MyCoursesPage from "@/views/MyCoursesPage.vue";
 import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
+import AddCourse from "@/views/AdminStuff/AddCourse.vue";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -85,11 +86,24 @@ const routes = [
     component: AdminPage,
     beforeEnter: function (to, from, next) {
       if (store.state.role !== "Admin" || store.state.isLoggedIn === false) {
-        next("/login");
+        next({ path: "/login" });
       } else {
         next();
       }
     },
+  },
+  // TODO error nav guard
+  {
+    path: "/add-course",
+    name: "AddCourse",
+    component: AddCourse,
+    // beforeEnter: function (to, from, next) {
+    //   if (store.state.role !== "Admin" || store.state.isLoggedIn === false) {
+    //     next({ path: "/login" });
+    //   } else {
+    //     next();
+    //   }
+    // },
   },
 ];
 
