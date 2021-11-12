@@ -23,7 +23,7 @@ export default new Vuex.Store({
   },
   actions: {
     // ! =========  Customer =========
-
+    // * done
     loginUser(context, { email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -39,7 +39,7 @@ export default new Vuex.Store({
           });
       });
     },
-
+    // * done
     registerUser(context, { name, email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -55,6 +55,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     fetchUserDetail() {
       return new Promise((resolve, reject) => {
         axios({
@@ -117,7 +118,7 @@ export default new Vuex.Store({
           });
       });
     },
-
+    // get mycourse
     fetchUserCourseUser() {
       return new Promise((resolve, reject) => {
         axios({
@@ -133,6 +134,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // get mycourse detail
     fetchUserCourseDetail(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -148,6 +150,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // buy
     addUserCourseUser(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -175,22 +178,6 @@ export default new Vuex.Store({
           method: "GET",
           url: "/admin/users",
           headers: { access_token: localStorage.getItem("access_token") },
-        })
-          .then(({ data }) => {
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err.response.data);
-          });
-      });
-    },
-    updateUserFromAdmin(context, { id, name, email, password }) {
-      return new Promise((resolve, reject) => {
-        axios({
-          method: "PUT",
-          url: `/admin/users/${id}`,
-          headers: localStorage.getItem("access_token"),
-          data: { name, email, password },
         })
           .then(({ data }) => {
             resolve(data);
@@ -330,11 +317,13 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     createCategoryAdmin(context, { name }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "POST",
           url: "/admin/categories",
+          headers: { access_token: localStorage.getItem("access_token") },
           data: {
             name,
           },

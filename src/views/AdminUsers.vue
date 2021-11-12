@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { alertError } from "../apis/swal";
 export default {
   name: "AdminUsers",
   data: function () {
@@ -37,7 +38,7 @@ export default {
           this.users = result;
         })
         .catch((err) => {
-          console.log(err);
+          alertError(err.message);
         });
     },
   },

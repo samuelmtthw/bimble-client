@@ -1,5 +1,24 @@
 <template>
   <section id="AdminCourses">
+    <button
+      class="addButton btn mb-4"
+      v-if="!showForm"
+      @click.prevent="changeForm(true)"
+    >
+      + Add Category
+    </button>
+    <form v-if="showForm" @submit.prevent="addCategories" class="mb-4">
+      <input
+        type="text"
+        class="form-control d-inline-block"
+        placeholder="New Category"
+        v-model="name"
+      />
+      <input type="submit" value="Add" class="btn mx-3 categoryButton" />
+      <button @click.prevent="changeForm(false)" class="btn cancelButton">
+        Cancel
+      </button>
+    </form>
     <table class="w-100">
       <thead>
         <tr>
@@ -24,14 +43,30 @@
 </template>
 
 <script>
+import { alertError, alertSuccess } from "../apis/swal";
 export default {
   name: "AdminCategories",
   data() {
     return {
       categories: [],
+      showForm: false,
+      name: "",
     };
   },
   methods: {
+    changeForm(status) {
+      this.showForm = status;
+    },
+    createCategoryAdmin() {
+      this.$store
+        .dispatch("createCategoryAdmin", { name: this.name })
+        .then((result) => {
+          alertSuccess(`Category ${result.name} has been created!`);
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
+    },
     fetchCategoriesAdmin() {
       this.$store
         .dispatch("fetchCategoriesAdmin")
@@ -40,7 +75,7 @@ export default {
           this.categories = result;
         })
         .catch((err) => {
-          console.log(err.message);
+          alertError(err.message);
         });
     },
   },
@@ -50,4 +85,31 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#AdminCourses input[type="text"] {
+  width: 250px;
+}
+
+#AdminCourses .categoryButton {
+  background-color: #eb5e0b;
+  color: #f8f1f1;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+#AdminCourses .categoryButton:hover {
+  background-color: #ce5109;
+}
+
+#AdminCourses .cancelButton {
+  background-color: #a3d2ca;
+  color: #eb5e0b;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+#AdminCourses .cancelButton:hover {
+  background-color: #8fcac0;
+}
+</style>

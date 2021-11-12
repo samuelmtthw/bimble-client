@@ -1,7 +1,7 @@
 <template>
   <section id="AdminCourses">
     <router-link to="/add-course"
-      ><button class="addButton btn mb-4">Add Course</button></router-link
+      ><button class="addButton btn mb-4">+ Add Course</button></router-link
     >
     <table class="w-100">
       <thead>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { alertError } from "../apis/swal";
 export default {
   name: "AdminCourses",
   data() {
@@ -61,7 +62,7 @@ export default {
           this.courses = result.course;
         })
         .catch((err) => {
-          console.log(err.message);
+          alertError(err.message);
         });
     },
   },

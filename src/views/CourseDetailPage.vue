@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { alertError } from "../apis/swal";
 export default {
   name: "CourseDetailPage",
   data: function () {
@@ -47,7 +48,7 @@ export default {
           this.course = result;
         })
         .catch((err) => {
-          console.log(err.message);
+          alertError(err.message);
         });
     },
     addUserCourseUser() {
@@ -61,7 +62,7 @@ export default {
       //     this.$router.push(`/buy/${this.course.id}`);
       //   })
       //   .catch((err) => {
-      //     console.log(err.message);
+      //     alertError(err.message);
       //   });
     },
   },

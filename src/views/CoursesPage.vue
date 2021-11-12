@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import { alertError } from "../apis/swal";
 import CourseCard from "../components/CourseCard.vue";
 
 export default {
@@ -158,7 +159,7 @@ export default {
           this.courses = result.course;
         })
         .catch((err) => {
-          console.log(err);
+          alertError(err.message);
         });
     },
   },
