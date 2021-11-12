@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { alertSuccess, alertError } from "../apis/swal";
+
 export default {
   name: "LoginPage",
   data: function () {
@@ -51,14 +53,22 @@ export default {
         password: this.password,
       };
       this.$store
-        .dispatch("login", payload)
+        .dispatch("loginUser", payload)
         .then((result) => {
-          console.log(result);
+          localStorage.setItem("access_token", result.access_token);
+          // if (result.role === "Admin") {
+          this.$store.commit("SET_ROLE", "Admin");
+          // this.$store.commit("SET_ROLE", result.role);
+          this.$store.commit("IS_LOGGED_IN", true);
+          // } else {
+          //   this.$store.commit("SET_ROLE", "User");
+          // }
+          this.$router.push("/");
+          alertSuccess("Welcome to Bimble!");
         })
         .catch((err) => {
-          console.log(err);
+          alertError(err.message);
         });
-      console.log(payload);
     },
   },
 };

@@ -5,8 +5,22 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    isLoggedIn: false,
+    role: "",
+    name: "",
+  },
+  mutations: {
+    IS_LOGGED_IN(state, payload) {
+      state.isLoggedIn = payload;
+    },
+    SET_ROLE(state, payload) {
+      state.role = payload;
+    },
+    SET_NAME(state, payload) {
+      state.name = payload;
+    },
+  },
   actions: {
     // ! =========  Customer =========
 
@@ -46,7 +60,7 @@ export default new Vuex.Store({
         axios({
           method: "GET",
           url: "/public/users",
-          headers: localStorage.getItem("access_token"),
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -61,7 +75,7 @@ export default new Vuex.Store({
         axios({
           method: "PUT",
           url: "/public/users",
-          headers: localStorage.getItem("access_token"),
+          headers: { access_token: localStorage.getItem("access_token") },
           data: { name, email },
         })
           .then(({ data }) => {
@@ -109,7 +123,7 @@ export default new Vuex.Store({
         axios({
           method: "GET",
           url: `/public/user-courses`,
-          headers: localStorage.getItem("access_token"),
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -124,7 +138,7 @@ export default new Vuex.Store({
         axios({
           method: "GET",
           url: `/public/user-courses/${courseId}`,
-          headers: localStorage.getItem("access_token"),
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -139,7 +153,7 @@ export default new Vuex.Store({
         axios({
           method: "POST",
           url: `/public/user-courses/${courseId}`,
-          headers: localStorage.getItem("access_token"),
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -299,12 +313,13 @@ export default new Vuex.Store({
     },
 
     //  ------------ CATEGORY ------------------
-
+    // * done
     fetchCategoriesAdmin() {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: "/admin/categories",
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -319,23 +334,6 @@ export default new Vuex.Store({
         axios({
           method: "POST",
           url: "/admin/categories",
-          data: {
-            name,
-          },
-        })
-          .then(({ data }) => {
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err.response.data);
-          });
-      });
-    },
-    editCategoryAdmin(context, { id, name }) {
-      return new Promise((resolve, reject) => {
-        axios({
-          method: "PATCH",
-          url: `/admin/categories/${id}`,
           data: {
             name,
           },
