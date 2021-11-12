@@ -1,5 +1,8 @@
 <template>
   <section id="AdminCourses">
+    <router-link to="/add-course"
+      ><button class="addButton btn mb-4">Add Course</button></router-link
+    >
     <table class="w-100">
       <thead>
         <tr>
@@ -69,17 +72,30 @@ export default {
 </script>
 
 <style>
-#AdminPage table th {
+#AdminCourses .addButton {
+  color: #f8f1f1;
+  background-color: #eb5e0b;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+#AdminCourses .addButton:hover {
+  background-color: #ce5109;
+}
+
+#AdminCourses table th {
   padding: 0 5px 5px 5px;
   font-size: 1.1em;
 }
 
-#AdminPage table td {
+#AdminCourses table td {
   padding: 5px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
-#AdminPage .actionButton {
+
+#AdminCourses .actionButton {
   background-color: #a3d2ca;
 }
 </style>

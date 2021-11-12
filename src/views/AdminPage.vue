@@ -15,13 +15,6 @@
           >
             Categories
           </button>
-          <!-- ! Pindahin ke AdminCourses -->
-          <button
-            class="navButton btn mb-3"
-            @click="changePage('getAddCourse')"
-          >
-            Add Course
-          </button>
         </div>
         <div class="col-10">
           <AdminCourses v-if="page === 'getCourses'" />
@@ -66,6 +59,7 @@ export default {
   font-weight: 700;
   font-style: italic;
 }
+
 #AdminPage .navButton:hover {
   background-color: #8fcac0;
 }

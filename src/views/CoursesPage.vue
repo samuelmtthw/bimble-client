@@ -184,7 +184,7 @@ export default {
   font-style: italic;
 }
 #CoursesPage input[type="submit"]:hover {
-  background-color: #dd5608;
+  background-color: #ce5109;
 }
 
 #CoursesPage button {
