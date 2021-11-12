@@ -28,7 +28,7 @@
                 Details
               </button>
               <button class="btn btn-secondary w-25">Update</button>
-              <button class="btn btn-dark w-25">Delete</button>
+              <button class="btn btn-danger w-25">Delete</button>
             </div>
           </td>
         </tr>

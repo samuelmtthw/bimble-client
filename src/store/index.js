@@ -336,11 +336,13 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     deleteCategoryAdmin(context, { categoryId }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "DELETE",
           url: `/admin/categories/${categoryId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);

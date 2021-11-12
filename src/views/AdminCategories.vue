@@ -33,7 +33,12 @@
           <td>{{ category.name }}</td>
           <td>
             <div class="d-flex flex-row justify-content-center">
-              <button class="btn btn-dark w-25">Delete</button>
+              <button
+                class="btn btn-danger w-25"
+                @click="deleteCategory(category.id)"
+              >
+                Delete
+              </button>
             </div>
           </td>
         </tr>
@@ -43,6 +48,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import { alertError, alertSuccess } from "../apis/swal";
 export default {
   name: "AdminCategories",
@@ -54,6 +60,31 @@ export default {
     };
   },
   methods: {
+    deleteCategory(categoryId) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: `You will delete the category and courses with categoryId: ${categoryId}!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store
+            .dispatch("deleteCategoryAdmin", { categoryId })
+            .then((result) => {
+              this.fetchCategoriesAdmin();
+              alertSuccess(result.message);
+            })
+            .catch((err) => {
+              alertError(err.message);
+            });
+        } else {
+          alertSuccess("Processs canceled");
+        }
+      });
+    },
     changeForm(status) {
       this.showForm = status;
     },
