@@ -7,7 +7,7 @@
       <h6 class="mb-3">{{ course.name }}</h6>
 
       <p>
-        <strong>RP. {{ course.price }}</strong>
+        <strong>{{ price }}</strong>
         <span>{{ difficulty }}</span>
       </p>
     </div>
@@ -29,6 +29,14 @@ export default {
       return this.course.difficulty.replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
+    },
+    price() {
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "IDR",
+      });
+
+      return formatter.format(this.course.price);
     },
   },
 };

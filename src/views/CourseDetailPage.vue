@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-2">
           <h3>{{ course.name }}</h3>
-          <strong>Rp. {{ course.price }}</strong> <br />
+          <strong> {{ price }}</strong> <br />
           <button class="btn mt-4" @click="addUserCourseUser">
             Purchase Now
           </button>
@@ -29,31 +29,13 @@ export default {
   name: "CourseDetailPage",
   data: function () {
     return {
-      course: {
-        id: 1,
-        name: "Program Linear",
-        description:
-          "Program Linear adalah bagian matematika yang membahas cara menentukan nilai optimum suatu fungsi – dinamakan fungsi obyektif atau fungsi tujuan – pada suatu sistem yang dibatasi beberapa kendala. Ada dua macam nilai optimum yang akan ditentukan, yaitu nilai maksimum dan nilai minimum.",
-        price: 145000,
-        thumbnailUrl:
-          "https://i.ytimg.com/vi/WJr11FExG7s/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLAImD8rRbQR7cuFCw3Z_xsjLlr1Tg",
-        difficulty: "medium",
-        status: "active",
-        rating: 8,
-        CategoryId: 1,
-        Videos: [
-          {
-            id: 1,
-            videoUrl: "https://www.youtube.com/embed/WJr11FExG7s",
-          },
-        ],
-      },
+      course: {},
     };
   },
   methods: {
     fetchCourseDetailUser() {
       this.$store
-        .dispatch("fetchCourseDetailUser")
+        .dispatch("fetchCoursesDetailUser", this.$route.params)
         .then((result) => {
           this.course = result;
         })
@@ -76,8 +58,18 @@ export default {
       //   });
     },
   },
+  computed: {
+    price() {
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "IDR",
+      });
+
+      return formatter.format(this.course.price);
+    },
+  },
   created() {
-    // this.fetchCourseDetailUser();
+    this.fetchCourseDetailUser();
   },
 };
 </script>

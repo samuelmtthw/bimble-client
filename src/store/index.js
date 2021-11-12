@@ -73,12 +73,12 @@ export default new Vuex.Store({
       });
     },
     // * done
-    fetchCoursesUser(context, { categoryId, orderBy, name, page }) {
+    fetchCoursesUser(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: "/public/courses",
-          params: { categoryId, orderBy, name, page },
+          params: payload,
         })
           .then(({ data }) => {
             resolve(data);
