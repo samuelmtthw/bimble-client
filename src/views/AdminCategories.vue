@@ -7,7 +7,7 @@
     >
       + Add Category
     </button>
-    <form v-if="showForm" @submit.prevent="addCategories" class="mb-4">
+    <form v-if="showForm" @submit.prevent="createCategoryAdmin" class="mb-4">
       <input
         type="text"
         class="form-control d-inline-block"
@@ -61,6 +61,7 @@ export default {
       this.$store
         .dispatch("createCategoryAdmin", { name: this.name })
         .then((result) => {
+          this.fetchCategoriesAdmin();
           alertSuccess(`Category ${result.name} has been created!`);
         })
         .catch((err) => {
