@@ -9,7 +9,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {
     // ! =========  Customer =========
-    // * done
+
     loginUser(context, { email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -25,7 +25,7 @@ export default new Vuex.Store({
           });
       });
     },
-    // * done
+
     registerUser(context, { name, email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -154,58 +154,13 @@ export default new Vuex.Store({
     // =======ADMIN=========== ADMIN =========ADMIN======
 
     // ------------- USER ----------------
-
-    loginAdmin(context, { email, password }) {
-      return new Promise((resolve, reject) => {
-        axios({
-          method: "POST",
-          url: "/admin/login",
-          data: { email, password },
-        })
-          .then(({ data }) => {
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err.response.data);
-          });
-      });
-    },
-    loginAdminGoogle(context, { idToken }) {
-      return new Promise((resolve, reject) => {
-        axios({
-          method: "POST",
-          url: "/admin/loginGoogle",
-          data: { idToken },
-        })
-          .then(({ data }) => {
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err.response.data);
-          });
-      });
-    },
-    registerAdmin(context, { name, email, password }) {
-      return new Promise((resolve, reject) => {
-        axios({
-          method: "POST",
-          url: "/admin/register",
-          data: { name, email, password },
-        })
-          .then(({ data }) => {
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err.response.data);
-          });
-      });
-    },
+    // * done
     fetchUsersFromAdmin() {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: "/admin/users",
-          headers: localStorage.getItem("access_token"),
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -233,12 +188,14 @@ export default new Vuex.Store({
     },
 
     // ------------- COURSES ------------------
-
-    fetchCoursesAdmin() {
+    // * done
+    fetchCoursesAdmin(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: "/admin/courses",
+          headers: { access_token: localStorage.getItem("access_token") },
+          params: payload,
         })
           .then(({ data }) => {
             resolve(data);
