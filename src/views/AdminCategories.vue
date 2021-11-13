@@ -103,7 +103,6 @@ export default {
       this.$store
         .dispatch("fetchCategoriesAdmin")
         .then((result) => {
-          console.log(result);
           this.categories = result;
         })
         .catch((err) => {

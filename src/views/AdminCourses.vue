@@ -1,8 +1,31 @@
 <template>
   <section id="AdminCourses">
-    <router-link to="/add-course"
-      ><button class="addButton btn mb-4">+ Add Course</button></router-link
-    >
+    <div class="d-flex justify-content-between mb-4">
+      <router-link to="/add-course">
+        <button class="addButton btn">+ Add Course</button></router-link
+      >
+      <div class="d-flex">
+        <form @submit.prevent="fetchCoursesAdmin">
+          <input
+            type="text"
+            v-model="search"
+            class="form-control d-inline-block mx-1"
+            placeholder="Course Name"
+          />
+          <input type="submit" value="Search" class="btn addButton" />
+        </form>
+      </div>
+    </div>
+    <ul class="pagination justify-content-start mb-3">
+      <li
+        class="page-item"
+        :class="idx + 1 === Number(page) ? 'active' : ''"
+        v-for="(item, idx) in totalPage"
+        :key="idx"
+      >
+        <a class="page-link" @click.prevent="changePage">{{ idx + 1 }}</a>
+      </li>
+    </ul>
     <table class="w-100">
       <thead>
         <tr>
@@ -35,18 +58,26 @@ export default {
     return {
       courses: [],
       page: 1,
+      totalPage: "",
+      search: "",
     };
   },
   methods: {
+    changePage(event) {
+      const targetPage = event.target.innerHTML;
+      this.page = targetPage;
+      this.fetchCoursesAdmin();
+    },
     fetchCoursesAdmin() {
       const payload = {
         page: this.page,
+        search: this.search,
       };
       this.$store
         .dispatch("fetchCoursesAdmin", payload)
         .then((result) => {
-          console.log(result);
           this.courses = result.course;
+          this.totalPage = result.totalPage;
         })
         .catch((err) => {
           alertError(err.message);
