@@ -270,6 +270,7 @@ export default new Vuex.Store({
         axios({
           method: "PATCH",
           url: `/admin/courses/${courseId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
           data: {
             status,
           },

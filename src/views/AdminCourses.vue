@@ -14,24 +14,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="course in courses" :key="course.id" class="p1">
-          <td class="text-center">{{ course.id }}</td>
-          <td>{{ course.name }}</td>
-          <td>{{ course.status }}</td>
-          <td>{{ course.Category.name }}</td>
-          <td>
-            <div class="d-flex flex-row justify-content-between">
-              <button
-                class="btn actionButton w-25"
-                @click.prevent="toDetails(course.id)"
-              >
-                Details
-              </button>
-              <button class="btn btn-secondary w-25">Update</button>
-              <button class="btn btn-danger w-25">Delete</button>
-            </div>
-          </td>
-        </tr>
+        <CourseRow
+          v-for="course in courses"
+          :key="course.id"
+          :course="course"
+          @updateStatus="fetchCoursesAdmin"
+        />
       </tbody>
     </table>
   </section>
@@ -39,6 +27,8 @@
 
 <script>
 import { alertError } from "../apis/swal";
+import CourseRow from "@/components/CourseRow.vue";
+
 export default {
   name: "AdminCourses",
   data() {
@@ -48,9 +38,6 @@ export default {
     };
   },
   methods: {
-    toDetails(courseId) {
-      this.$router.push(`/courses/${courseId}`);
-    },
     fetchCoursesAdmin() {
       const payload = {
         page: this.page,
@@ -69,13 +56,16 @@ export default {
   created() {
     this.fetchCoursesAdmin();
   },
+  components: {
+    CourseRow,
+  },
 };
 </script>
 
 <style>
 #AdminCourses .addButton {
   color: #f8f1f1;
-  background-color: #5eaaa8;
+  background-color: #eb5e0b;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;

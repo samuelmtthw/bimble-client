@@ -44,6 +44,26 @@
           {{ category.name }}
         </option>
       </select>
+
+      <label>Videos:</label>
+      <div v-for="(video, k) in videos" :key="k">
+        <input type="file" @change="changeSelect(k) && addFile" />
+        <span>
+          <i
+            class="btn btn-primary"
+            @click="remove(k)"
+            v-show="k || (!k && videos.length > 1)"
+            >Remove</i
+          >
+          <i
+            class="btn btn-primary"
+            @click="add(k)"
+            v-show="k == videos.length - 1"
+            >Add fields</i
+          >
+        </span>
+      </div>
+
       <button type="submit">Create Course!!</button>
     </form>
   </section>
@@ -63,6 +83,8 @@ export default {
       difficulty: "",
       CategoryId: "",
       categories: [],
+      // select = 0,
+      videos: [{ file: "" }],
     };
   },
   methods: {
@@ -75,14 +97,32 @@ export default {
         difficulty: this.difficulty,
         CategoryId: this.CategoryId,
       };
-      this.$store
-        .dispatch("createCourseAdmin", payload)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          alertError(err.message);
-        });
+
+      console.log(payload);
+      // this.$store
+      //   .dispatch("createCourseAdmin", payload)
+      //   .then((result) => {
+      //     console.log(result);
+      //   })
+      //   .catch((err) => {
+      //     alertError(err.message);
+      //   });
+    },
+
+    add() {
+      this.videos.push({
+        file: "",
+      });
+      // console.log(this.videos);
+    },
+    remove(index) {
+      this.videos.splice(index, 1);
+    },
+    changeSelect(k) {
+      this.select = k;
+    },
+    addFile(e) {
+      this.videos[this.select].file = e.target.files;
     },
   },
   created() {
