@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { alertSuccess, alertError } from "../apis/swal";
+
 export default {
   name: "LoginPage",
   data: function () {
@@ -51,14 +53,21 @@ export default {
         password: this.password,
       };
       this.$store
-        .dispatch("login", payload)
+        .dispatch("loginUser", payload)
         .then((result) => {
-          console.log(result);
+          localStorage.setItem("access_token", result.access_token);
+          this.$store.commit("SET_ROLE", result.role);
+          this.$store.commit("IS_LOGGED_IN", true);
+          if (result.role === "Admin") {
+            this.$router.push("/admin");
+          } else {
+            this.$router.push("/courses");
+          }
+          alertSuccess("Welcome to Bimble!");
         })
         .catch((err) => {
-          console.log(err);
+          alertError(err.message);
         });
-      console.log(payload);
     },
   },
 };
@@ -67,7 +76,6 @@ export default {
 <style>
 #LoginPage .card {
   min-width: 600px;
-  /* height: fit-content; */
 }
 
 #LoginPage span {

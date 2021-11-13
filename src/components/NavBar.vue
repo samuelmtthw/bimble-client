@@ -5,21 +5,39 @@
       <div class="navLinks d-flex flex-row">
         <router-link to="/"><h6>Home</h6></router-link>
         <router-link to="/courses"><h6>Courses</h6></router-link>
-        <router-link to="/my-courses"><h6>My Courses</h6></router-link>
-        <router-link to="/login"><h6>Log In</h6></router-link>
-        <a @click.prevent="logout"><h6>Log Out</h6></a>
+        <router-link to="/my-courses" v-if="isLoggedIn"
+          ><h6>My Courses</h6></router-link
+        >
+        <router-link to="/admin" v-if="role === 'Admin'">
+          <h6>Admin</h6></router-link
+        >
+        <router-link to="/login" v-if="!isLoggedIn"
+          ><h6>Log In</h6></router-link
+        >
+        <a @click.prevent="logout" v-if="isLoggedIn"><h6>Log Out</h6></a>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { alertSuccess } from "../apis/swal";
+
 export default {
   name: "NavBar",
+  computed: {
+    ...mapState(["isLoggedIn", "role"]),
+  },
   methods: {
     logout() {
+      this.$store.commit("IS_LOGGED_IN", false);
+      this.$store.commit("SET_ROLE", "");
       localStorage.removeItem("access_token");
-      this.$router.push("/");
+      if (this.$router.currentRoute.path !== "/") {
+        this.$router.push("/");
+      }
+      alertSuccess("See you again!");
     },
   },
 };
