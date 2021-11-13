@@ -80,10 +80,15 @@ export default {
 
 #AdminPage .navButton:hover {
   background-color: #8fcac0;
+  color: #eb5e0b;
 }
 
 #AdminPage .active {
   background-color: #eb5e0b;
+  color: #f8f1f1;
+}
+#AdminPage .active:hover {
+  background-color: #ce5109;
   color: #f8f1f1;
 }
 </style>

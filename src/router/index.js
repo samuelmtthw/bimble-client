@@ -10,6 +10,7 @@ import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import AddCourse from "@/views/AdminStuff/AddCourse.vue";
+import UpdateCourse from "@/views/AdminStuff/UpdateCourse.vue";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -104,6 +105,11 @@ const routes = [
     //     next();
     //   }
     // },
+  },
+  {
+    path: "/update-course/:courseId",
+    name: "UpdateCourse",
+    component: UpdateCourse,
   },
 ];
 

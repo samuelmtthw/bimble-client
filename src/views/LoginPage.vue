@@ -76,7 +76,6 @@ export default {
 <style>
 #LoginPage .card {
   min-width: 600px;
-  /* height: fit-content; */
 }
 
 #LoginPage span {

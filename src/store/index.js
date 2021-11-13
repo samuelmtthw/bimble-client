@@ -206,11 +206,13 @@ export default new Vuex.Store({
           });
       });
     },
+    //  TODO 1/2
     fetchCoursesDetailAdmin(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: `/admin/courses/${courseId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
             resolve(data);
@@ -247,32 +249,13 @@ export default new Vuex.Store({
           });
       });
     },
-    editCourseAdmin(
-      context,
-      {
-        courseId,
-        name,
-        description,
-        price,
-        thumbnailUrl,
-        difficulty,
-        status,
-        CategoryId,
-      }
-    ) {
+    editCourseAdmin(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
           method: "PUT",
-          url: `/admin/courses/${courseId}`,
-          data: {
-            name,
-            description,
-            price,
-            thumbnailUrl,
-            difficulty,
-            status,
-            CategoryId,
-          },
+          url: `/admin/courses/${payload.courseId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: payload,
         })
           .then(({ data }) => {
             resolve(data);
