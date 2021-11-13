@@ -6,6 +6,7 @@ import RegisterPage from "@/views/RegisterPage.vue";
 import CoursesPage from "@/views/CoursesPage.vue";
 
 import MyCoursesPage from "@/views/MyCoursesPage.vue";
+import MyCourseDetail from "@/views/UserStuff/MyCourseDetail.vue";
 import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
@@ -66,6 +67,19 @@ const routes = [
     path: "/my-courses",
     name: "MyCourses",
     component: MyCoursesPage,
+    beforeEnter: function (to, from, next) {
+      if (!localStorage.getItem("access_token")) {
+        next({ path: "/login" });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    // to Detail of MyCourse
+    path: "/my-courses/:courseId",
+    name: "MyCourseDetail",
+    component: MyCourseDetail,
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });

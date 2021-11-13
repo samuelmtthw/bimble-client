@@ -1,13 +1,12 @@
 <template>
-  <router-link :to="`/courses/${courseId}`">
-    <div class="CourseCard card p-3">
+  <router-link :to="`/my-courses/${courseId}`">
+    <div class="MyCourseCard card p-3">
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
       </div>
       <h6 class="mb-3">{{ course.name }}</h6>
 
       <p>
-        <strong>{{ price }}</strong>
         <span>{{ difficulty }}</span>
       </p>
     </div>
@@ -16,12 +15,12 @@
 
 <script>
 export default {
-  name: "CourseCard",
+  name: "MyCourseCard",
   props: ["course", "courseId"],
   methods: {
     toDetails() {
-      console.log(this.course.id);
-      this.$router.push(`/courses/${this.courseId}`);
+      console.log(this.courseId);
+      this.$router.push(`/my-courses/${this.courseId}`);
     },
   },
   computed: {
@@ -43,8 +42,8 @@ export default {
 </script>
 
 <style>
-.CourseCard {
-  width: 350px;
+.MyCourseCard {
+  width: 250px;
   margin: 0 0 15px 15px;
   border-radius: 15px;
   transition-duration: 150ms;
@@ -52,17 +51,11 @@ export default {
   border-color: #eee;
 }
 
-.CourseCard img {
+.MyCourseCard img {
   border-radius: 15px;
 }
 
-.CourseCard strong {
-  color: #eb5e0b;
-  font-size: 1.2em;
-}
-
-.CourseCard span {
-  float: right;
+.MyCourseCard span {
   color: #eb5e0b;
   background-color: #a3d2ca;
   font-family: "Poppins", sans-serif;
@@ -73,7 +66,7 @@ export default {
   padding: 3px 15px;
 }
 
-.CourseCard:hover {
+.MyCourseCard:hover {
   border-color: #a3d2ca;
 }
 </style>
