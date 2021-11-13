@@ -56,14 +56,13 @@ export default {
         .dispatch("loginUser", payload)
         .then((result) => {
           localStorage.setItem("access_token", result.access_token);
-          // if (result.role === "Admin") {
-          this.$store.commit("SET_ROLE", "Admin");
-          // this.$store.commit("SET_ROLE", result.role);
+          this.$store.commit("SET_ROLE", result.role);
           this.$store.commit("IS_LOGGED_IN", true);
-          // } else {
-          //   this.$store.commit("SET_ROLE", "User");
-          // }
-          this.$router.push("/");
+          if (result.role === "Admin") {
+            this.$router.push("/admin");
+          } else {
+            this.$router.push("/courses");
+          }
           alertSuccess("Welcome to Bimble!");
         })
         .catch((err) => {
