@@ -75,7 +75,7 @@ export default {
 <style>
 #AdminCourses .addButton {
   color: #f8f1f1;
-  background-color: #eb5e0b;
+  background-color: #5eaaa8;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;

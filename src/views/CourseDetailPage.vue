@@ -49,6 +49,7 @@ export default {
         })
         .catch((err) => {
           alertError(err.message);
+          this.$router.push("/courses");
         });
     },
     addUserCourseUser() {

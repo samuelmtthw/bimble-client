@@ -3,14 +3,32 @@
     <div class="wrapper">
       <div class="row">
         <div class="col-2 d-flex flex-column">
-          <button class="navButton btn mb-3" @click="changePage('getCourses')">
+          <button
+            :class="
+              page === 'getCourses'
+                ? 'navButton btn mb-3 active'
+                : 'navButton btn mb-3'
+            "
+            @click="changePage('getCourses')"
+          >
             Courses
           </button>
-          <button class="navButton btn mb-3" @click="changePage('getUsers')">
+          <button
+            :class="
+              page === 'getUsers'
+                ? 'navButton btn mb-3 active'
+                : 'navButton btn mb-3'
+            "
+            @click="changePage('getUsers')"
+          >
             Users
           </button>
           <button
-            class="navButton btn mb-3"
+            :class="
+              page === 'getCategories'
+                ? 'navButton btn mb-3 active'
+                : 'navButton btn mb-3'
+            "
             @click="changePage('getCategories')"
           >
             Categories
