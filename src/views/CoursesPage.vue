@@ -73,6 +73,17 @@
         </form>
         <div class="col-10">
           <h3 class="mb-3">Courses</h3>
+          <ul class="pagination justify-content-start mb-3">
+            <li
+              class="page-item"
+              :class="idx + 1 === Number(page) ? 'active' : ''"
+              v-for="(item, idx) in totalPage"
+              :key="idx"
+            >
+              <a class="page-link" @click.prevent="changePage">{{ idx + 1 }}</a>
+            </li>
+          </ul>
+
           <div class="d-flex flex-row flex-wrap">
             <CourseCard
               v-for="course in courses"
@@ -97,6 +108,7 @@ export default {
       courses: [],
       categories: [],
       page: 1,
+      totalPage: "",
       search: "",
       categoryId: "",
       price: "",
@@ -104,6 +116,11 @@ export default {
     };
   },
   methods: {
+    changePage(event) {
+      const targetPage = event.target.innerHTML;
+      this.page = targetPage;
+      this.fetchCoursesUser();
+    },
     clear() {
       this.search = "";
       this.categoryId = "";
@@ -133,7 +150,9 @@ export default {
         .dispatch("fetchCoursesUser", payload)
         .then((result) => {
           // TODO setup pagination
+          console.log(result);
           this.courses = result.course;
+          this.totalPage = result.totalPage;
         })
         .catch((err) => {
           alertError(err.message);
@@ -142,6 +161,7 @@ export default {
   },
   created() {
     this.fetchCoursesUser();
+    this.fetchCategoriesUser();
   },
   components: {
     CourseCard,
@@ -175,7 +195,12 @@ export default {
 #CoursesPage h3 {
   margin-left: 15px;
 }
+
 #CoursesPage label {
   font-family: "Poppins", sans-serif;
+}
+
+#CoursesPage ul {
+  margin-left: 15px;
 }
 </style>
