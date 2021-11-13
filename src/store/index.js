@@ -39,6 +39,22 @@ export default new Vuex.Store({
           });
       });
     },
+    // TODO
+    googleLogin(context, idToken) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: "/public/googleLogin",
+          data: { idToken },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
     // * done
     registerUser(context, { name, email, password }) {
       return new Promise((resolve, reject) => {
@@ -71,6 +87,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     updateUserDetail(context, { name, email }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -123,10 +140,11 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
-          url: `/public/user-courses`,
+          url: `/public/userCourse`,
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
+            console.log(data);
             resolve(data);
           })
           .catch((err) => {
@@ -343,6 +361,21 @@ export default new Vuex.Store({
         axios({
           method: "DELETE",
           url: `/admin/categories/${categoryId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    deleteCommentAdmin(context, { commentId }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "DELETE",
+          url: `/admin/comments/${commentId}`,
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {

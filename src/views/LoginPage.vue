@@ -21,9 +21,12 @@
 
           <input type="submit" value="Log In" class="form-control btn mt-3" />
           <span class="my-1 text-muted text-center">or</span>
-          <button value="Log In" class="form-control btn mb-3">
+
+          <GoogleButton />
+
+          <!-- <button value="Log In" class="form-control btn mb-3">
             Continue with Google
-          </button>
+          </button> -->
 
           <small class="text-muted text-center mt-3"
             >Don't have an account? Register
@@ -37,6 +40,7 @@
 
 <script>
 import { alertSuccess, alertError } from "../apis/swal";
+import GoogleButton from "@/components/GoogleButton.vue";
 
 export default {
   name: "LoginPage",
@@ -61,7 +65,7 @@ export default {
           if (result.role === "Admin") {
             this.$router.push("/admin");
           } else {
-            this.$router.push("/courses");
+            this.$router.push("/");
           }
           alertSuccess("Welcome to Bimble!");
         })
@@ -69,6 +73,9 @@ export default {
           alertError(err.message);
         });
     },
+  },
+  components: {
+    GoogleButton,
   },
 };
 </script>
@@ -90,8 +97,16 @@ export default {
   font-weight: 700;
   font-style: italic;
 }
-
 #LoginPage .btn:hover {
   background-color: #8fcac0;
+}
+
+#LoginPage .googleButton {
+  border: none;
+  background-color: #6c757d;
+  color: #fff;
+}
+#LoginPage .googleButton:hover {
+  background-color: #5c636a;
 }
 </style>
