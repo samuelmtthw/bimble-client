@@ -95,40 +95,7 @@ export default {
   data: function () {
     return {
       courses: [],
-      categories: [
-        {
-          id: 1,
-          name: "Matematika",
-        },
-        {
-          id: 2,
-          name: "FIsika",
-        },
-        {
-          id: 3,
-          name: "Kimia",
-        },
-        {
-          id: 4,
-          name: "Biologi",
-        },
-        {
-          id: 5,
-          name: "Ekonomi",
-        },
-        {
-          id: 6,
-          name: "Geografi",
-        },
-        {
-          id: 7,
-          name: "Sejarah",
-        },
-        {
-          id: 8,
-          name: "Sosiologi",
-        },
-      ],
+      categories: [],
       page: 1,
       search: "",
       categoryId: "",
@@ -142,6 +109,16 @@ export default {
       this.categoryId = "";
       this.price = "";
       this.difficulty = "";
+    },
+    fetchCategoriesUser() {
+      this.$store
+        .dispatch("fetchCategoriesUser")
+        .then((result) => {
+          this.categories = result;
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
     },
     fetchCoursesUser() {
       const payload = {

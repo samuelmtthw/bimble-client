@@ -105,17 +105,19 @@ export default {
         thumbnailUrl: this.thumbnailUrl,
         difficulty: this.difficulty,
         CategoryId: this.CategoryId,
+        Videos: this.videos,
       };
-
       console.log(payload);
-      // this.$store
-      //   .dispatch("createCourseAdmin", payload)
-      //   .then((result) => {
-      //     console.log(result);
-      //   })
-      //   .catch((err) => {
-      //     alertError(err.message);
-      //   });
+      this.$store
+        .dispatch("createCourseAdmin", payload)
+        .then((result) => {
+          console.log(result);
+          this.$router.push("/courses");
+        })
+        .catch((err) => {
+          const message = err.message.join(", ");
+          alertError(message);
+        });
     },
 
     add() {

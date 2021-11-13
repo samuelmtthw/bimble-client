@@ -39,7 +39,7 @@ export default new Vuex.Store({
           });
       });
     },
-    // TODO
+    // * done
     googleLogin(context, idToken) {
       return new Promise((resolve, reject) => {
         axios({
@@ -95,6 +95,20 @@ export default new Vuex.Store({
           url: "/public/users",
           headers: { access_token: localStorage.getItem("access_token") },
           data: { name, email },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    fetchCategoriesUser() {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: "/public/categories",
         })
           .then(({ data }) => {
             resolve(data);

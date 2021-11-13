@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/courses/${courseId}`">
+  <router-link :to="`/courses/${course.id}`">
     <div class="CourseCard card p-3">
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
@@ -17,11 +17,10 @@
 <script>
 export default {
   name: "CourseCard",
-  props: ["course", "courseId"],
+  props: ["course"],
   methods: {
     toDetails() {
-      console.log(this.course.id);
-      this.$router.push(`/courses/${this.courseId}`);
+      this.$router.push(`/courses/${this.course.id}`);
     },
   },
   computed: {

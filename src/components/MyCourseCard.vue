@@ -4,11 +4,7 @@
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
       </div>
-      <h6 class="mb-3">{{ course.name }}</h6>
-
-      <p>
-        <span>{{ difficulty }}</span>
-      </p>
+      <h5>{{ course.name }}</h5>
     </div>
   </router-link>
 </template>
@@ -44,7 +40,7 @@ export default {
 <style>
 .MyCourseCard {
   width: 250px;
-  margin: 0 0 15px 15px;
+  margin: 0 15px 15px 0;
   border-radius: 15px;
   transition-duration: 150ms;
   border-width: 2px;
@@ -55,15 +51,12 @@ export default {
   border-radius: 15px;
 }
 
-.MyCourseCard span {
+.MyCourseCard h5 {
   color: #eb5e0b;
-  background-color: #a3d2ca;
+
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
-  width: fit-content;
-  border-radius: 5px;
-  padding: 3px 15px;
 }
 
 .MyCourseCard:hover {

@@ -4,7 +4,9 @@
     class="stationary-page d-flex justify-content-center"
   >
     <div class="wrapper">
+      <h3>My Courses</h3>
       <div class="d-flex flex-row flex-wrap">
+        <br />
         <MyCourseCard
           v-for="course in courses"
           :key="course.id"
