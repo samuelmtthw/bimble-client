@@ -166,6 +166,22 @@ export default new Vuex.Store({
           });
       });
     },
+    addCommentUser(context, { videoId, comment }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: `/public/comments/${videoId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: { comment },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
 
     // =======ADMIN=========== ADMIN =========ADMIN======
     // =======ADMIN=========== ADMIN =========ADMIN======
@@ -265,6 +281,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     updateCourseStatusAdmin(context, { courseId, status }) {
       return new Promise((resolve, reject) => {
         axios({

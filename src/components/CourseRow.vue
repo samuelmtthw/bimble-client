@@ -19,14 +19,11 @@
     </td>
     <td>{{ course.Category.name }}</td>
     <td>
-      <div class="d-flex flex-row justify-content-between">
-        <button
-          class="btn actionButton w-25"
-          @click.prevent="toDetails(course.id)"
-        >
+      <div class="d-flex flex-row justify-content-around">
+        <button class="btn actionButton" @click.prevent="toDetails(course.id)">
           Details
         </button>
-        <button class="btn btn-secondary w-25" @click="toUpdate(course.id)">
+        <button class="btn btn-secondary" @click="toUpdate(course.id)">
           Update
         </button>
       </div>

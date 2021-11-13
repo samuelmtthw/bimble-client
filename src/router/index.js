@@ -11,26 +11,32 @@ import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import AddCourse from "@/views/AdminStuff/AddCourse.vue";
 import UpdateCourse from "@/views/AdminStuff/UpdateCourse.vue";
+
+import UpdateUser from "@/views/UserStuff/UpdateUser.vue";
 import store from "../store";
 
 Vue.use(VueRouter);
 
 const routes = [
+  // TODO bikin landingpage
   {
     path: "/",
     name: "Home",
     component: HomePage,
   },
+  // TODO bikin pagination
   {
     path: "/courses",
     name: "Courses",
     component: CoursesPage,
   },
+  // TODO tambahin comment
   {
     path: "/courses/:courseId",
     name: "CourseDetail",
     component: CourseDetailPage,
   },
+  // TODO tambahin google login
   {
     path: "/login",
     name: "Login",
@@ -43,6 +49,7 @@ const routes = [
       }
     },
   },
+  // * done
   {
     path: "/register",
     name: "Register",
@@ -59,7 +66,18 @@ const routes = [
     path: "/my-courses",
     name: "MyCourses",
     component: MyCoursesPage,
-    // navguard sama kaya login, arahin ke login
+    beforeEnter: function (to, from, next) {
+      if (!localStorage.getItem("access_token")) {
+        next({ path: "/login" });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: "/update-profile",
+    name: "UpdateUser",
+    component: UpdateUser,
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });
@@ -72,7 +90,6 @@ const routes = [
     path: "/buy/:courseId",
     name: "BuyPage",
     component: BuyPage,
-    // navguard sama kaya login, arahin ke login
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });
@@ -81,6 +98,7 @@ const routes = [
       }
     },
   },
+  // ! Admin
   {
     path: "/admin",
     name: "AdminPage",
@@ -106,6 +124,7 @@ const routes = [
     //   }
     // },
   },
+  // TODO navguard
   {
     path: "/update-course/:courseId",
     name: "UpdateCourse",
