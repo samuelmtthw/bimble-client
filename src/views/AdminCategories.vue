@@ -134,13 +134,13 @@ export default {
 }
 
 #AdminCourses .cancelButton {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #6c757d;
+  color: #f8f1f1;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #AdminCourses .cancelButton:hover {
-  background-color: #8fcac0;
+  background-color: #5c636a;
 }
 </style>

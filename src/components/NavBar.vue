@@ -56,7 +56,7 @@ nav h1 {
 
 nav h6 {
   font-weight: 400;
-  font-weight: 700;
+  font-weight: 600;
   font-style: italic;
   color: #eb5e0b;
 }

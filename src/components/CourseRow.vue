@@ -20,7 +20,7 @@
     <td>{{ course.Category.name }}</td>
     <td>
       <div class="d-flex flex-row justify-content-around">
-        <button class="btn actionButton" @click.prevent="toDetails(course.id)">
+        <button class="btn detailsButton" @click.prevent="toDetails(course.id)">
           Details
         </button>
         <button class="btn btn-secondary" @click="toUpdate(course.id)">
@@ -72,4 +72,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.detailsButton {
+  background-color: #a3d2ca;
+}
+
+.detailsButton:hover {
+  background-color: #8fcac0;
+}
+</style>

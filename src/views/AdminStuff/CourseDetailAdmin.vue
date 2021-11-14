@@ -100,9 +100,15 @@ export default {
       return formatter.format(this.course.price);
     },
     difficulty() {
-      return this.course?.difficulty.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
+      let result = "";
+      if (this.course.difficulty) {
+        result = this.course.difficulty[0].toUpperCase();
+
+        for (let i = 1; i < this.course.difficulty.length; i++) {
+          result += this.course.difficulty[i];
+        }
+      }
+      return result;
     },
   },
 };

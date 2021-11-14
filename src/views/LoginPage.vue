@@ -91,14 +91,14 @@ export default {
 }
 
 #LoginPage .btn {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #eb5e0b;
+  color: #f8f1f1;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #LoginPage .btn:hover {
-  background-color: #8fcac0;
+  background-color: #ce5109;
 }
 
 #LoginPage .googleButton {

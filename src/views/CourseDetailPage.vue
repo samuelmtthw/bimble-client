@@ -10,14 +10,14 @@
             <h3>{{ course.name }}</h3>
             <strong> {{ price }}</strong>
             <h6 class="mt-2">Rating</h6>
-            <span>{{ rating }} / 10</span>
+            <span>{{ rating }}</span>
             <h6 class="mt-2">Difficulty</h6>
             <span>{{ difficulty }}</span>
           </div>
           <hr />
           <strong class="d-block mb-3">Want full access?</strong>
           <button class="btn w-100" @click="addUserCourseUser">
-            Purchase Now
+            Purchase Here
           </button>
         </div>
         <div class="col-10">
@@ -39,7 +39,9 @@ export default {
   name: "CourseDetailPage",
   data: function () {
     return {
-      course: {},
+      course: {
+        Videos: [{ videoUrl: "" }],
+      },
       rating: "",
     };
   },
@@ -48,7 +50,11 @@ export default {
       this.$store
         .dispatch("fetchCourseRating", this.$route.params)
         .then((result) => {
-          this.rating = result.rating;
+          if (result.rating) {
+            this.rating = `${result.rating} / 10`;
+          } else {
+            this.rating = "Not Rated";
+          }
         })
         .catch((err) => {
           alertError(err.message);
@@ -68,16 +74,6 @@ export default {
     },
     addUserCourseUser() {
       this.$router.push(`/buy/${this.course.id}`);
-
-      // this.$store
-      //   .dispatch("addUserCourseUser", { courseId: this.course.id })
-      //   .then((result) => {
-      //     console.log(result);
-      //     this.$router.push(`/buy/${this.course.id}`);
-      //   })
-      //   .catch((err) => {
-      //     alertError(err.message);
-      //   });
     },
   },
   computed: {
@@ -90,9 +86,15 @@ export default {
       return formatter.format(this.course.price);
     },
     difficulty() {
-      return this.course.difficulty.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
+      let result = "";
+      if (this.course.difficulty) {
+        result = this.course.difficulty[0].toUpperCase();
+
+        for (let i = 1; i < this.course.difficulty.length; i++) {
+          result += this.course.difficulty[i];
+        }
+      }
+      return result;
     },
   },
   created() {
@@ -136,15 +138,15 @@ export default {
 }
 
 #CourseDetail .btn {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #eb5e0b;
+  color: #f8f1f1;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #CourseDetail .btn:hover {
-  background-color: #8fcac0;
+  background-color: #ce5109;
 }
 
 * {

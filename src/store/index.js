@@ -149,6 +149,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     fetchCourseRating(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -163,7 +164,7 @@ export default new Vuex.Store({
           });
       });
     },
-    // get mycourse
+    // * done
     fetchUserCourseUser() {
       return new Promise((resolve, reject) => {
         axios({
@@ -172,7 +173,6 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
-            console.log(data);
             resolve(data);
           })
           .catch((err) => {
@@ -185,7 +185,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
-          url: `/public/user-courses/${courseId}`,
+          url: `/public/userCourses/${courseId}`,
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
@@ -196,13 +196,29 @@ export default new Vuex.Store({
           });
       });
     },
-    // buy
+    // but
     addUserCourseUser(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "POST",
-          url: `/public/user-courses/${courseId}`,
+          url: `/public/userCourses/${courseId}`,
           headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    ovoCharge(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: `/ovo/charge`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: payload,
         })
           .then(({ data }) => {
             resolve(data);

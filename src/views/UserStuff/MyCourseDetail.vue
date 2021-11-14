@@ -62,12 +62,12 @@ export default {
         })
         .catch((err) => {
           alertError(err.message);
+          this.$router.push("/my-courses");
         });
     },
   },
   created() {
     this.fetchUserCourseDetail();
-    this.fetchCourseRating();
   },
 };
 </script>

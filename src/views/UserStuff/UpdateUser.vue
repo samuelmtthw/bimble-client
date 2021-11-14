@@ -42,8 +42,8 @@ export default {
 
       this.$store
         .dispatch("updateUserDetail", payload)
-        .then((result) => {
-          alertSuccess(result.message);
+        .then(() => {
+          alertSuccess("Profile has been updated");
           this.$router.push("/my-courses");
         })
         .catch((err) => {
