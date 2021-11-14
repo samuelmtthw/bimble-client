@@ -11,7 +11,7 @@
           <span>Course Name </span>
           <input type="text" v-model="name" class="form-control mb-3" />
 
-          <span>Description: </span>
+          <span>Description </span>
           <textarea
             v-model="description"
             cols="30"
@@ -19,10 +19,10 @@
             class="form-control mb-3"
           />
 
-          <span>Price: </span>
+          <span>Price </span>
           <input type="number" v-model="price" class="form-control mb-3" />
 
-          <span>Thumbnail Url: </span>
+          <span>Thumbnail URL </span>
           <input type="url" v-model="thumbnailUrl" class="form-control mb-3" />
 
           <span>Difficulty </span>
