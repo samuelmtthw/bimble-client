@@ -10,7 +10,7 @@
           <label><span>Username</span></label>
           <input
             type="text"
-            v-model="username"
+            v-model="name"
             placeholder="John Doe"
             class="form-control mb-3"
           />
@@ -41,11 +41,13 @@
 </template>
 
 <script>
+import { alertSuccess, alertError } from "../apis/swal";
+
 export default {
   name: "RegisterPage",
   data: function () {
     return {
-      username: "",
+      name: "",
       password: "",
       email: "",
     };
@@ -53,11 +55,21 @@ export default {
   methods: {
     register() {
       let payload = {
-        username: this.username,
+        name: this.name,
         email: this.email,
         password: this.password,
       };
-
+      this.$store
+        .dispatch("registerUser", payload)
+        .then((result) => {
+          alertSuccess(
+            `New user created with email ${result.email}. Please log in to continue`
+          );
+          this.$router.push("/login");
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
       console.log(payload);
     },
   },
@@ -75,14 +87,14 @@ export default {
 }
 
 #RegisterPage .btn {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #eb5e0b;
+  color: #f8f1f1;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #RegisterPage .btn:hover {
-  background-color: #8fcac0;
+  background-color: #ce5109;
 }
 </style>

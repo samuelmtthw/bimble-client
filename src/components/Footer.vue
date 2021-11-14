@@ -1,7 +1,7 @@
 <template>
   <footer class="d-flex justify-content-center">
     <div class="wrapper d-flex justify-content-center">
-      <span>&copy; 2021 <strong>BIMBLE</strong></span>
+      <span><strong>BIMBLE</strong></span>
     </div>
   </footer>
 </template>
