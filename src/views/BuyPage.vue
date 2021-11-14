@@ -44,15 +44,17 @@ export default {
         .dispatch("addUserCourseUser", this.$route.params)
         .then((result) => {
           const payload = {
-            phoneNumber: this.phoneNumber,
+            phoneNumber: `+${this.phoneNumber}`,
             userCourseId: result.id,
           };
-          this.store
+
+          this.$store
             .dispatch("ovoCharge", payload)
             .then(() => {
               alertSuccess(
                 `Course ${this.course.name} is added! Please check the notification on your phone. To check your courses, open 'My Course' page. `
               );
+              this.$router.push("/my-courses");
             })
             .catch((err) => {
               alertError(err.message);
