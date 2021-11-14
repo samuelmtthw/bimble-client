@@ -25,7 +25,6 @@ const routes = [
     name: "Home",
     component: HomePage,
   },
-  // TODO bikin pagination
   {
     path: "/courses",
     name: "Courses",
@@ -37,7 +36,6 @@ const routes = [
     name: "CourseDetail",
     component: CourseDetailPage,
   },
-  // TODO tambahin google login
   {
     path: "/login",
     name: "Login",
@@ -76,7 +74,6 @@ const routes = [
     },
   },
   {
-    // to Detail of MyCourse
     path: "/my-courses/:courseId",
     name: "MyCourseDetail",
     component: MyCourseDetail,
@@ -118,8 +115,10 @@ const routes = [
     name: "AdminPage",
     component: AdminPage,
     beforeEnter: function (to, from, next) {
-      if (store.state.role !== "Admin" || store.state.isLoggedIn === false) {
+      if (store.state.isLoggedIn === false) {
         next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
       } else {
         next();
       }
@@ -130,19 +129,30 @@ const routes = [
     path: "/add-course",
     name: "AddCourse",
     component: AddCourse,
-    // beforeEnter: function (to, from, next) {
-    //   if (store.state.role !== "Admin" || store.state.isLoggedIn === false) {
-    //     next({ path: "/login" });
-    //   } else {
-    //     next();
-    //   }
-    // },
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
   },
   // TODO navguard
   {
     path: "/update-course/:courseId",
     name: "UpdateCourse",
     component: UpdateCourse,
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
   },
 ];
 
