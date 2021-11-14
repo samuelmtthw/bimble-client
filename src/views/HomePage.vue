@@ -65,12 +65,12 @@ export default {
   height: auto;
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background: linear-gradient(
+  /* background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.1) 100%
     ),
-    url("../assets/bg-masthead.jpg");
+    url("../assets/bg-masthead.jpg"); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
