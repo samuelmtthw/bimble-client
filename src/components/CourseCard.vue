@@ -4,23 +4,44 @@
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
       </div>
-      <h6 class="mb-3">{{ course.name }}</h6>
-
+      <h6>{{ course.name }}</h6>
+      <strong>{{ price }}</strong>
+      <hr />
       <p>
-        <strong>{{ price }}</strong>
-        <span>{{ difficulty }}</span>
+        <span> {{ difficulty }}</span>
+        <span> {{ rating }}</span>
       </p>
     </div>
   </router-link>
 </template>
 
 <script>
+import { alertError } from "../apis/swal";
 export default {
   name: "CourseCard",
   props: ["course"],
+  data: function () {
+    return {
+      rating: "",
+    };
+  },
   methods: {
     toDetails() {
       this.$router.push(`/courses/${this.course.id}`);
+    },
+    fetchCourseRating() {
+      this.$store
+        .dispatch("fetchCourseRating", { courseId: this.course.id })
+        .then((result) => {
+          if (result.rating) {
+            this.rating = `${result.rating} / 10`;
+          } else {
+            this.rating = "Not Rated";
+          }
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
     },
   },
   computed: {
@@ -37,6 +58,9 @@ export default {
 
       return formatter.format(this.course.price);
     },
+  },
+  created() {
+    this.fetchCourseRating();
   },
 };
 </script>
@@ -61,7 +85,6 @@ export default {
 }
 
 .CourseCard span {
-  float: right;
   color: #eb5e0b;
   background-color: #a3d2ca;
   font-family: "Poppins", sans-serif;
@@ -70,6 +93,7 @@ export default {
   width: fit-content;
   border-radius: 5px;
   padding: 3px 15px;
+  margin-right: 5px;
 }
 
 .CourseCard:hover {

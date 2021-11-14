@@ -149,8 +149,6 @@ export default {
       this.$store
         .dispatch("fetchCoursesUser", payload)
         .then((result) => {
-          // TODO setup pagination
-          console.log(result);
           this.courses = result.course;
           this.totalPage = result.totalPage;
         })

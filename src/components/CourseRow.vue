@@ -46,7 +46,7 @@ export default {
       this.$router.push(`/update-course/${courseId}`);
     },
     toDetails(courseId) {
-      this.$router.push(`/courses/${courseId}`);
+      this.$router.push(`/admin/course/${courseId}`);
     },
     handleStatus() {
       const payload = {

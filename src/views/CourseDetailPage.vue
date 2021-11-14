@@ -6,8 +6,14 @@
     <div class="wrapper">
       <div class="row">
         <div class="col-2">
-          <h3>{{ course.name }}</h3>
-          <strong> {{ price }}</strong>
+          <div class="d-flex flex-column">
+            <h3>{{ course.name }}</h3>
+            <strong> {{ price }}</strong>
+            <h6 class="mt-2">Rating</h6>
+            <span>{{ rating }} / 10</span>
+            <h6 class="mt-2">Difficulty</h6>
+            <span>{{ difficulty }}</span>
+          </div>
           <hr />
           <strong class="d-block mb-3">Want full access?</strong>
           <button class="btn w-100" @click="addUserCourseUser">
@@ -17,10 +23,6 @@
         <div class="col-10">
           <strong class="d-block mb-3">Spoiler</strong>
           <iframe :src="course.Videos[0].videoUrl" frameborder="0" />
-          <!-- <iframe
-            src="https://ik.imagekit.io/k6nbxr4qece/trailer_WBuYWPkmE.mp4"
-            frameborder="0"
-          /> -->
           <br />
           <hr />
           <strong class="d-block mb-3">Description</strong>
@@ -38,9 +40,21 @@ export default {
   data: function () {
     return {
       course: {},
+      rating: "",
     };
   },
   methods: {
+    fetchCourseRating() {
+      this.$store
+        .dispatch("fetchCourseRating", this.$route.params)
+        .then((result) => {
+          this.rating = result.rating;
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
+    },
+
     fetchCourseDetailUser() {
       this.$store
         .dispatch("fetchCoursesDetailUser", this.$route.params)
@@ -53,7 +67,6 @@ export default {
         });
     },
     addUserCourseUser() {
-      console.log(this.course.id);
       this.$router.push(`/buy/${this.course.id}`);
 
       // this.$store
@@ -76,9 +89,15 @@ export default {
 
       return formatter.format(this.course.price);
     },
+    difficulty() {
+      return this.course.difficulty.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+    },
   },
   created() {
     this.fetchCourseDetailUser();
+    this.fetchCourseRating();
   },
 };
 </script>
@@ -98,6 +117,17 @@ export default {
 
 #CourseDetail strong {
   font-size: 1.3em;
+}
+
+#CourseDetail span {
+  color: #eb5e0b;
+  background-color: #a3d2ca;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 3px 15px;
 }
 
 #CourseDetail iframe {

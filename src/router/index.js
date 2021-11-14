@@ -11,6 +11,7 @@ import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import AddCourse from "@/views/AdminStuff/AddCourse.vue";
+import CourseDetailAdmin from "@/views/AdminStuff/CourseDetailAdmin.vue";
 import UpdateCourse from "@/views/AdminStuff/UpdateCourse.vue";
 
 import UpdateUser from "@/views/UserStuff/UpdateUser.vue";
@@ -124,7 +125,6 @@ const routes = [
       }
     },
   },
-  // TODO error nav guard
   {
     path: "/add-course",
     name: "AddCourse",
@@ -139,7 +139,20 @@ const routes = [
       }
     },
   },
-  // TODO navguard
+  {
+    path: "/admin/course/:courseId",
+    name: "CourseDetailAdmin",
+    component: CourseDetailAdmin,
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
+  },
   {
     path: "/update-course/:courseId",
     name: "UpdateCourse",

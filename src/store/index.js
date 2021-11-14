@@ -149,6 +149,20 @@ export default new Vuex.Store({
           });
       });
     },
+    fetchCourseRating(context, { courseId }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: `/public/ratings/${courseId}`,
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
     // get mycourse
     fetchUserCourseUser() {
       return new Promise((resolve, reject) => {
