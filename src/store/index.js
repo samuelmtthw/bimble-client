@@ -40,6 +40,22 @@ export default new Vuex.Store({
       });
     },
     // * done
+    googleLogin(context, idToken) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: "/public/googleLogin",
+          data: { idToken },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    // * done
     registerUser(context, { name, email, password }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -71,6 +87,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // * done
     updateUserDetail(context, { name, email }) {
       return new Promise((resolve, reject) => {
         axios({
@@ -78,6 +95,20 @@ export default new Vuex.Store({
           url: "/public/users",
           headers: { access_token: localStorage.getItem("access_token") },
           data: { name, email },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    fetchCategoriesUser() {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: "/public/categories",
         })
           .then(({ data }) => {
             resolve(data);
@@ -118,12 +149,27 @@ export default new Vuex.Store({
           });
       });
     },
-    // get mycourse
+    // * done
+    fetchCourseRating(context, { courseId }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: `/public/ratings/${courseId}`,
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    // * done
     fetchUserCourseUser() {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
-          url: `/public/user-courses`,
+          url: `/public/userCourse`,
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
@@ -139,7 +185,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
-          url: `/public/user-courses/${courseId}`,
+          url: `/public/userCourses/${courseId}`,
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {
@@ -150,13 +196,29 @@ export default new Vuex.Store({
           });
       });
     },
-    // buy
+    // but
     addUserCourseUser(context, { courseId }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "POST",
-          url: `/public/user-courses/${courseId}`,
+          url: `/public/userCourses/${courseId}`,
           headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    ovoCharge(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: `/ovo/charge`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: payload,
         })
           .then(({ data }) => {
             resolve(data);
@@ -343,6 +405,21 @@ export default new Vuex.Store({
         axios({
           method: "DELETE",
           url: `/admin/categories/${categoryId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    deleteCommentAdmin(context, { commentId }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "DELETE",
+          url: `/admin/comments/${commentId}`,
           headers: { access_token: localStorage.getItem("access_token") },
         })
           .then(({ data }) => {

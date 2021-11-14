@@ -6,10 +6,12 @@ import RegisterPage from "@/views/RegisterPage.vue";
 import CoursesPage from "@/views/CoursesPage.vue";
 
 import MyCoursesPage from "@/views/MyCoursesPage.vue";
+import MyCourseDetail from "@/views/UserStuff/MyCourseDetail.vue";
 import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import AddCourse from "@/views/AdminStuff/AddCourse.vue";
+import CourseDetailAdmin from "@/views/AdminStuff/CourseDetailAdmin.vue";
 import UpdateCourse from "@/views/AdminStuff/UpdateCourse.vue";
 
 import UpdateUser from "@/views/UserStuff/UpdateUser.vue";
@@ -24,7 +26,6 @@ const routes = [
     name: "Home",
     component: HomePage,
   },
-  // TODO bikin pagination
   {
     path: "/courses",
     name: "Courses",
@@ -36,7 +37,6 @@ const routes = [
     name: "CourseDetail",
     component: CourseDetailPage,
   },
-  // TODO tambahin google login
   {
     path: "/login",
     name: "Login",
@@ -75,6 +75,18 @@ const routes = [
     },
   },
   {
+    path: "/my-courses/:courseId",
+    name: "MyCourseDetail",
+    component: MyCourseDetail,
+    beforeEnter: function (to, from, next) {
+      if (!localStorage.getItem("access_token")) {
+        next({ path: "/login" });
+      } else {
+        next();
+      }
+    },
+  },
+  {
     path: "/update-profile",
     name: "UpdateUser",
     component: UpdateUser,
@@ -104,31 +116,56 @@ const routes = [
     name: "AdminPage",
     component: AdminPage,
     beforeEnter: function (to, from, next) {
-      if (store.state.role !== "Admin" || store.state.isLoggedIn === false) {
+      if (store.state.isLoggedIn === false) {
         next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
       } else {
         next();
       }
     },
   },
-  // TODO error nav guard
   {
     path: "/add-course",
     name: "AddCourse",
     component: AddCourse,
-    // beforeEnter: function (to, from, next) {
-    //   if (store.state.role !== "Admin" || store.state.isLoggedIn === false) {
-    //     next({ path: "/login" });
-    //   } else {
-    //     next();
-    //   }
-    // },
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
   },
-  // TODO navguard
+  {
+    path: "/admin/course/:courseId",
+    name: "CourseDetailAdmin",
+    component: CourseDetailAdmin,
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
+  },
   {
     path: "/update-course/:courseId",
     name: "UpdateCourse",
     component: UpdateCourse,
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
   },
 ];
 

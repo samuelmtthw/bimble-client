@@ -47,7 +47,17 @@
 
       <label>Videos:</label>
       <div v-for="(video, k) in videos" :key="k">
-        <input type="file" @change="changeSelect(k) && addFile" />
+        <label class="btn btn-secondary" :for="`addFileButton${k}`"
+          >Choose File</label
+        >
+        <label>{{ videos[k].file.name }} </label>
+        <input
+          type="file"
+          @change="addVideo($event, k)"
+          title="test"
+          :id="`addFileButton${k}`"
+          style="display: none"
+        />
         <span>
           <i
             class="btn btn-primary"
@@ -82,9 +92,8 @@ export default {
       thumbnailUrl: "",
       difficulty: "",
       CategoryId: "",
-      categories: [],
-      // select = 0,
       videos: [{ file: "" }],
+      categories: [],
     };
   },
   methods: {
@@ -96,17 +105,19 @@ export default {
         thumbnailUrl: this.thumbnailUrl,
         difficulty: this.difficulty,
         CategoryId: this.CategoryId,
+        Videos: this.videos,
       };
-
       console.log(payload);
-      // this.$store
-      //   .dispatch("createCourseAdmin", payload)
-      //   .then((result) => {
-      //     console.log(result);
-      //   })
-      //   .catch((err) => {
-      //     alertError(err.message);
-      //   });
+      this.$store
+        .dispatch("createCourseAdmin", payload)
+        .then((result) => {
+          console.log(result);
+          this.$router.push("/courses");
+        })
+        .catch((err) => {
+          const message = err.message.join(", ");
+          alertError(message);
+        });
     },
 
     add() {
@@ -118,11 +129,8 @@ export default {
     remove(index) {
       this.videos.splice(index, 1);
     },
-    changeSelect(k) {
-      this.select = k;
-    },
-    addFile(e) {
-      this.videos[this.select].file = e.target.files;
+    addVideo(event, index) {
+      this.videos[index].file = event.target.files[0];
     },
   },
   created() {

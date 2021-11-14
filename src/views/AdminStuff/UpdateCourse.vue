@@ -11,7 +11,7 @@
           <span>Course Name </span>
           <input type="text" v-model="name" class="form-control mb-3" />
 
-          <span>Description: </span>
+          <span>Description </span>
           <textarea
             v-model="description"
             cols="30"
@@ -19,10 +19,10 @@
             class="form-control mb-3"
           />
 
-          <span>Price: </span>
+          <span>Price </span>
           <input type="number" v-model="price" class="form-control mb-3" />
 
-          <span>Thumbnail Url: </span>
+          <span>Thumbnail URL </span>
           <input type="url" v-model="thumbnailUrl" class="form-control mb-3" />
 
           <span>Difficulty </span>
@@ -139,14 +139,14 @@ export default {
 }
 
 #UpdateCourse .btn {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #eb5e0b;
+  color: #f8f1f1;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #UpdateCourse .btn:hover {
-  background-color: #8fcac0;
+  background-color: #ce5109;
 }
 #UpdateCourse .btn-back {
   background-color: #6c757d;

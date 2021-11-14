@@ -73,6 +73,17 @@
         </form>
         <div class="col-10">
           <h3 class="mb-3">Courses</h3>
+          <ul class="pagination justify-content-start mb-3">
+            <li
+              class="page-item"
+              :class="idx + 1 === Number(page) ? 'active' : ''"
+              v-for="(item, idx) in totalPage"
+              :key="idx"
+            >
+              <a class="page-link" @click.prevent="changePage">{{ idx + 1 }}</a>
+            </li>
+          </ul>
+
           <div class="d-flex flex-row flex-wrap">
             <CourseCard
               v-for="course in courses"
@@ -95,41 +106,9 @@ export default {
   data: function () {
     return {
       courses: [],
-      categories: [
-        {
-          id: 1,
-          name: "Matematika",
-        },
-        {
-          id: 2,
-          name: "FIsika",
-        },
-        {
-          id: 3,
-          name: "Kimia",
-        },
-        {
-          id: 4,
-          name: "Biologi",
-        },
-        {
-          id: 5,
-          name: "Ekonomi",
-        },
-        {
-          id: 6,
-          name: "Geografi",
-        },
-        {
-          id: 7,
-          name: "Sejarah",
-        },
-        {
-          id: 8,
-          name: "Sosiologi",
-        },
-      ],
+      categories: [],
       page: 1,
+      totalPage: "",
       search: "",
       categoryId: "",
       price: "",
@@ -137,11 +116,26 @@ export default {
     };
   },
   methods: {
+    changePage(event) {
+      const targetPage = event.target.innerHTML;
+      this.page = targetPage;
+      this.fetchCoursesUser();
+    },
     clear() {
       this.search = "";
       this.categoryId = "";
       this.price = "";
       this.difficulty = "";
+    },
+    fetchCategoriesUser() {
+      this.$store
+        .dispatch("fetchCategoriesUser")
+        .then((result) => {
+          this.categories = result;
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
     },
     fetchCoursesUser() {
       const payload = {
@@ -155,8 +149,8 @@ export default {
       this.$store
         .dispatch("fetchCoursesUser", payload)
         .then((result) => {
-          // TODO setup pagination
           this.courses = result.course;
+          this.totalPage = result.totalPage;
         })
         .catch((err) => {
           alertError(err.message);
@@ -165,6 +159,7 @@ export default {
   },
   created() {
     this.fetchCoursesUser();
+    this.fetchCategoriesUser();
   },
   components: {
     CourseCard,
@@ -198,7 +193,12 @@ export default {
 #CoursesPage h3 {
   margin-left: 15px;
 }
+
 #CoursesPage label {
   font-family: "Poppins", sans-serif;
+}
+
+#CoursesPage ul {
+  margin-left: 15px;
 }
 </style>
