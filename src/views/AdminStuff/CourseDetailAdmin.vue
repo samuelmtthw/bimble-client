@@ -19,7 +19,7 @@
         <div class="col-3">
           <div class="d-flex justify-content-between">
             <span>{{ difficulty }}</span>
-            <span>{{ rating }} / 10</span>
+            <span>{{ rating }}</span>
           </div>
           <hr />
           <strong>{{ price }}</strong>
@@ -75,7 +75,11 @@ export default {
       this.$store
         .dispatch("fetchCourseRating", this.$route.params)
         .then((result) => {
-          this.rating = result.rating;
+          if (result.rating) {
+            this.rating = `${result.rating} / 10`;
+          } else {
+            this.rating = "Not Rated";
+          }
         })
         .catch((err) => {
           alertError(err.message);
