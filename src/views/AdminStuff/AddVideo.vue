@@ -45,7 +45,7 @@ export default {
       const files = new FormData(e.target);
 
       const payload = {
-        file: files,
+        files: files,
         courseId: this.$route.params.courseId,
       };
       alertLoading();
