@@ -73,6 +73,18 @@ export default {
         page: this.page,
         search: this.search,
       };
+
+      let query = {
+        page: this.page,
+      };
+
+      if (this.search !== "") query.search = payload.search;
+      this.$router
+        .push({
+          query: Object.assign({}, this.$route.query, query),
+        })
+        .catch(() => {});
+
       this.$store
         .dispatch("fetchCoursesAdmin", payload)
         .then((result) => {
