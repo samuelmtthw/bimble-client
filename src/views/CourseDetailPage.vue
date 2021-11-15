@@ -21,12 +21,48 @@
           </button>
         </div>
         <div class="col-10">
-          <strong class="d-block mb-3">Spoiler</strong>
-          <iframe :src="course.Videos[0].videoUrl" frameborder="0" />
+          <div class="row">
+            <div class="col-9">
+              <strong class="d-block mb-3"
+                >Spoiler: {{ course.Videos[0].name }}</strong
+              >
+              <div class="videoContainer">
+                <iframe :src="course.Videos[0].videoUrl" frameborder="0" />
+              </div>
+            </div>
+            <div class="col-3">
+              <strong class="d-block mb-3">Videos in this course</strong>
+              <span
+                v-for="(video, idx) in course.Videos"
+                :key="video.id"
+                :class="
+                  idx === 0 ? 'btn w-100 mb-1' : 'btn w-100 mb-1 disabled'
+                "
+                disabled
+              >
+                {{ video.name }}
+              </span>
+            </div>
+          </div>
           <br />
           <hr />
-          <strong class="d-block mb-3">Description</strong>
+          <strong class="d-block mb-1">Description</strong>
           <p>{{ course.description }}</p>
+          <strong class="d-block mb-1"
+            >Comments for this video ({{ comments.length }}):</strong
+          >
+          <div
+            class="card container"
+            v-for="comment in comments"
+            :key="comment.id"
+          >
+            <div class="card-body">
+              <div class="text">
+                <h6 class="card-title">{{ comment.User.name }}</h6>
+                <p>{{ comment.comment }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +103,11 @@ export default {
         .dispatch("fetchCoursesDetailUser", this.$route.params)
         .then((result) => {
           this.course = result;
-          this.comments = result.Videos[0].Comments;
+          if (result.Videos[0]) {
+            this.comments = result.Videos[0].Comments;
+          } else {
+            this.comments = [];
+          }
         })
         .catch((err) => {
           alertError(err.message);
@@ -134,9 +174,21 @@ export default {
   padding: 3px 15px;
 }
 
-#CourseDetail iframe {
-  width: 900px;
-  height: 524px;
+#CourseDetail .videoContainer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+#CourseDetail .videoContainer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #CourseDetail .btn {
@@ -147,8 +199,13 @@ export default {
   font-style: italic;
 }
 
-#CourseDetail .btn:hover {
+#CourseDetail button.btn:hover {
   background-color: #ce5109;
+}
+
+#CourseDetail .disabled {
+  background-color: #6c757d;
+  color: #f8f1f1;
 }
 
 * {
