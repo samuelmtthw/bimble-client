@@ -430,6 +430,38 @@ export default new Vuex.Store({
           });
       });
     },
+    //  ----------------- Videos -----------------
+    addVideoAdmin(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: `/admin/videos/${payload.courseId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: payload,
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    deleteVideoAdmin(context, videoId) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "DELETE",
+          url: `/admin/videos/${videoId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
   },
   modules: {},
 });

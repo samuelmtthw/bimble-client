@@ -23,6 +23,11 @@
         <button class="btn detailsButton" @click.prevent="toDetails(course.id)">
           Details
         </button>
+
+        <button class="btn btn-primary" @click="toAddVideo(course.id)">
+          Add Video
+        </button>
+
         <button class="btn btn-secondary" @click="toUpdate(course.id)">
           Update
         </button>
@@ -42,6 +47,9 @@ export default {
     };
   },
   methods: {
+    toAddVideo(courseId) {
+      this.$router.push(`/add-video/${courseId}`);
+    },
     toUpdate(courseId) {
       this.$router.push(`/update-course/${courseId}`);
     },

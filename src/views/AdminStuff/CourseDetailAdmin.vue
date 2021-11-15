@@ -6,10 +6,15 @@
     <div class="wrapper">
       <div class="row">
         <div class="col-9">
-          <h3>{{ course.name }} - {{ course.Category.name }}</h3>
+          <h3>{{ course.name }}</h3>
           <hr />
-          <strong>{{ displayed.name }}</strong
-          ><br />
+          <div class="d-flex justify-content-between">
+            <strong>{{ displayed.name }}</strong>
+            <button class="btn btn-danger" @click="deleteVideo(displayed.id)">
+              Delete Video
+            </button>
+          </div>
+          <br />
           <div class="videoContainer mt-1 mb-3">
             <iframe :src="displayed.videoUrl" frameborder="0"></iframe>
           </div>
@@ -42,7 +47,8 @@
 </template>
 
 <script>
-import { alertError } from "../../apis/swal";
+import Swal from "sweetalert2";
+import { alertError, alertSuccess } from "../../apis/swal";
 export default {
   name: "CourseDetailAdmin",
   data: function () {
@@ -54,6 +60,31 @@ export default {
     };
   },
   methods: {
+    deleteVideo(videoId) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: `You will delete video with name: ${this.displayed.name}!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store
+            .dispatch("deleteVideoAdmin", videoId)
+            .then((result) => {
+              alertSuccess(result.message);
+              this.fetchCoursesDetailAdmin();
+            })
+            .catch((err) => {
+              alertError(err.message);
+            });
+        } else {
+          alertSuccess("Processs canceled");
+        }
+      });
+    },
     changeVideo(idx) {
       this.displayed = this.course.Videos[idx];
       this.index = idx;
@@ -180,5 +211,13 @@ export default {
 }
 #CourseDetailAdmin .btn-back:hover {
   background-color: #5c636a;
+}
+
+#CourseDetailAdmin .btn-danger {
+  background-color: #dc3545;
+  color: #f8f1f1;
+}
+#CourseDetailAdmin .btn-danger:hover {
+  background-color: #bb2d3b;
 }
 </style>
