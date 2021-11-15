@@ -48,16 +48,15 @@ export default {
         file: files,
         courseId: this.$route.params.courseId,
       };
-      console.log(payload, "PAYLOAD");
       alertLoading();
       this.$store
         .dispatch("addVideoAdmin", payload)
         .then(() => {
-          LoadingDone();
           this.$router.push("/admin");
+          LoadingDone();
         })
         .catch((err) => {
-          alertError(err);
+          alertError(err.message);
         });
     },
   },

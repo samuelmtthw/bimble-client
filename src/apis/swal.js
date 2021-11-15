@@ -20,16 +20,21 @@ function alertError(message) {
   Swal.fire(data);
 }
 
-function alertLoading(data) {
+function alertLoading() {
   Swal.fire({
-    title: "Processing...",
-    html: "Please wait",
-    showConfirmButton: false,
+    title: "Please Wait!",
+    html: "Uploading data",
+    allowEscapeKey: false,
     allowOutsideClick: false,
+    showConfirmButton: false,
     didOpen: () => {
-      data;
+      Swal.showLoading();
     },
   });
+}
+
+function LoadingDone() {
+  Swal.fire("Finished !!", "upload success", "success");
 }
 
 // getMyRecipes() {
@@ -46,4 +51,4 @@ function alertLoading(data) {
 //   swalLoading(loading);
 // },
 
-export { alertSuccess, alertError, alertLoading };
+export { alertSuccess, alertError, alertLoading, LoadingDone };

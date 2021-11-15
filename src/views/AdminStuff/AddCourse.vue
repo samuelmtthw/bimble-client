@@ -94,6 +94,7 @@
 
 <script>
 import { alertError, alertLoading, LoadingDone } from "../../apis/swal";
+// import Swal from "sweetalert2";
 
 export default {
   name: "AddCourse",
@@ -110,8 +111,8 @@ export default {
       this.$store
         .dispatch("createCourseAdmin", createdCourse)
         .then(() => {
+          this.$router.push("/admin");
           LoadingDone();
-          this.$router.push("/courses");
         })
         .catch((err) => {
           const message = err.message.join(", ");
