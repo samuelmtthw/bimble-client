@@ -6,7 +6,28 @@
     <div class="wrapper">
       <div class="row">
         <div class="col-9">
-          <h3>{{ course.name }}</h3>
+          <div class="d-flex justify-content-between align-items-start">
+            <h3>{{ course.name }}</h3>
+            <form
+              class="d-flex w-25"
+              @submit.prevent="addUserCourseRating"
+              v-if="showForm"
+            >
+              <input
+                type="number"
+                v-model="rating"
+                min="1"
+                max="10"
+                class="form-control mx-2"
+                placeholder="Rating"
+                required
+              />
+              <input type="submit" value="Rate" class="btn active" />
+            </form>
+            <span v-if="!showForm"
+              >Your rating for this course : {{ rating }}</span
+            >
+          </div>
           <hr />
           <strong>{{ displayed.name }}</strong>
           <br />
@@ -52,7 +73,7 @@
             v-for="(video, idx) in course.Videos"
             :key="video.id"
             @click="changeVideo(idx)"
-            :class="index === idx ? 'btn w-100 mt-1 active' : 'btn w-100 mt-1'"
+            :class="index === idx ? 'btn w-100 mb-2 active' : 'btn w-100 mb-2'"
           >
             {{ video.name }}
           </button>
@@ -67,19 +88,40 @@
 </template>
 
 <script>
-import { alertError } from "../../apis/swal";
+import { alertError, alertSuccess } from "../../apis/swal";
 
 export default {
   name: "MyCourseDetail",
   data: function () {
     return {
       course: {},
-      displayed: {},
+      displayed: {
+        Comments: [],
+      },
       index: 0,
       comment: "",
+      rating: "",
+      showForm: true,
     };
   },
   methods: {
+    addUserCourseRating() {
+      const payload = {
+        courseId: this.$route.params.courseId,
+        rating: this.rating,
+      };
+      this.$store
+        .dispatch("addUserCourseRating", payload)
+        .then((result) => {
+          alertSuccess(
+            `You gave course with id ${result.CourseId} a rating of ${result.rating} / 10`
+          );
+          this.fetchUserCourseRating();
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
+    },
     changeVideo(idx) {
       this.displayed = this.course.Videos[idx];
       this.index = idx;
@@ -112,9 +154,24 @@ export default {
           alertError(err.message);
         });
     },
+    fetchUserCourseRating() {
+      const courseId = this.$route.params.courseId;
+      this.$store
+        .dispatch("fetchUserCourseRating", courseId)
+        .then((result) => {
+          if (result) {
+            this.rating = `${result.rating} / 10`;
+            this.showForm = false;
+          }
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
+    },
   },
   created() {
     this.fetchUserCourseDetail();
+    this.fetchUserCourseRating();
   },
 };
 </script>

@@ -34,7 +34,7 @@ function alertLoading() {
 }
 
 function LoadingDone() {
-  Swal.fire("Finished !!", "upload success", "success");
+  Swal.fire("Finished !!", "Upload success", "success");
 }
 
 // getMyRecipes() {
