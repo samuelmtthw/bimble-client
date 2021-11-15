@@ -1,4 +1,4 @@
-<template>
+  <template>
   <section id="AddVideo" class="stationary-page d-flex justify-content-center">
     <div class="wrapper d-flex justify-content-center align-items-center">
       <div class="card p-5 rounded">
@@ -45,7 +45,7 @@ export default {
       const files = new FormData(e.target);
 
       const payload = {
-        file: files,
+        files: files,
         courseId: this.$route.params.courseId,
       };
       console.log(payload, "PAYLOAD");

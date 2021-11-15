@@ -93,7 +93,8 @@
 </template>
 
 <script>
-import { alertError, alertLoading, LoadingDone } from "../../apis/swal";
+import { alertError } from "../../apis/swal";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export default {
   name: "AddCourse",
@@ -106,11 +107,19 @@ export default {
   methods: {
     addCourse(e) {
       const createdCourse = new FormData(e.target);
-      alertLoading();
+      // alertLoading();
       this.$store
         .dispatch("createCourseAdmin", createdCourse)
         .then(() => {
-          LoadingDone();
+          // LoadingDone();
+                 Swal.fire({
+                title: 'Please Wait !',
+                html: 'data uploading',// add html attribute if you want or remove
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            });
           this.$router.push("/courses");
         })
         .catch((err) => {
