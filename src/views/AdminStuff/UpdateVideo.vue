@@ -9,13 +9,14 @@
           <h2 class="mb-4">Edit Video</h2>
           <div class="videoContainer">
             <iframe :src="video.videoUrl" frameborder="0"></iframe>
-            <iframe
-              :src="video.videoUrl"
-              frameborder="0"
-            ></iframe>
+            <iframe :src="video.videoUrl" frameborder="0"></iframe>
           </div>
           <span class="mt-3">Video Title</span>
-          <input type="text" v-model="video.name" class="form-control mb-3 mt-1" />
+          <input
+            type="text"
+            v-model="video.name"
+            class="form-control mb-3 mt-1"
+          />
 
           <input type="submit" value="Edit" class="btn form-control mt-3" />
 
@@ -33,6 +34,7 @@
 
 <script>
 import { alertError } from "@/apis/swal.js";
+import { alertSuccess } from "../../apis/swal";
 export default {
   name: "UpdateVideo",
   data: function () {
@@ -40,8 +42,8 @@ export default {
       video: {
         name: "",
         videoUrl: "",
-        CourseId: ""
-      }
+        CourseId: "",
+      },
     };
   },
   methods: {
@@ -50,8 +52,10 @@ export default {
         name: this.video.name,
         videoId: this.$route.params.videoId,
       };
-      this.$store.dispatch('updateVideoAdmin', payload)
+      this.$store
+        .dispatch("updateVideoAdmin", payload)
         .then(() => {
+          alertSuccess(`Video with id ${this.video.id} has been changed!`);
           this.$router.push(`/admin/course/${this.video.CourseId}`);
         })
         .catch((err) => {
