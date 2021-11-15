@@ -11,6 +11,8 @@ import CourseDetailPage from "@/views/CourseDetailPage.vue";
 import BuyPage from "@/views/BuyPage.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import AddCourse from "@/views/AdminStuff/AddCourse.vue";
+import AddVideo from "@/views/AdminStuff/AddVideo.vue";
+import UpdateVideo from "@/views/AdminStuff/UpdateVideo.vue";
 import CourseDetailAdmin from "@/views/AdminStuff/CourseDetailAdmin.vue";
 import UpdateCourse from "@/views/AdminStuff/UpdateCourse.vue";
 
@@ -30,12 +32,34 @@ const routes = [
     path: "/courses",
     name: "Courses",
     component: CoursesPage,
+    beforeEnter: function (to, from, next) {
+      if (localStorage.getItem("access_token")) {
+        if (store.state.role !== "User") {
+          next({ path: "/" });
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
   },
   // TODO tambahin comment
   {
     path: "/courses/:courseId",
     name: "CourseDetail",
     component: CourseDetailPage,
+    beforeEnter: function (to, from, next) {
+      if (localStorage.getItem("access_token")) {
+        if (store.state.role !== "User") {
+          next({ path: "/" });
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/login",
@@ -49,7 +73,6 @@ const routes = [
       }
     },
   },
-  // * done
   {
     path: "/register",
     name: "Register",
@@ -69,6 +92,8 @@ const routes = [
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });
+      } else if (store.state.role !== "User") {
+        next({ path: "/" });
       } else {
         next();
       }
@@ -81,6 +106,8 @@ const routes = [
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });
+      } else if (store.state.role !== "User") {
+        next({ path: "/" });
       } else {
         next();
       }
@@ -93,6 +120,8 @@ const routes = [
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });
+      } else if (store.state.role !== "User") {
+        next({ path: "/" });
       } else {
         next();
       }
@@ -105,6 +134,8 @@ const routes = [
     beforeEnter: function (to, from, next) {
       if (!localStorage.getItem("access_token")) {
         next({ path: "/login" });
+      } else if (store.state.role !== "User") {
+        next({ path: "/" });
       } else {
         next();
       }
@@ -129,6 +160,34 @@ const routes = [
     path: "/add-course",
     name: "AddCourse",
     component: AddCourse,
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: "/add-video/:courseId",
+    name: "AddVideo",
+    component: AddVideo,
+    beforeEnter: function (to, from, next) {
+      if (store.state.isLoggedIn === false) {
+        next({ path: "/login" });
+      } else if (store.state.role !== "Admin") {
+        next({ path: "/" });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: "/update-video/:videoId",
+    name: "UpdateVideo",
+    component: UpdateVideo,
     beforeEnter: function (to, from, next) {
       if (store.state.isLoggedIn === false) {
         next({ path: "/login" });

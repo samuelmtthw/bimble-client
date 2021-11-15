@@ -42,6 +42,7 @@ export default {
       course: {
         Videos: [{ videoUrl: "" }],
       },
+      comments: [],
       rating: "",
     };
   },
@@ -66,6 +67,7 @@ export default {
         .dispatch("fetchCoursesDetailUser", this.$route.params)
         .then((result) => {
           this.course = result;
+          this.comments = result.Videos[0].Comments;
         })
         .catch((err) => {
           alertError(err.message);
