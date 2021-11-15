@@ -146,6 +146,21 @@ export default {
         difficulty: this.difficulty,
       };
 
+      let query = {
+        page: this.page,
+      };
+
+      if (this.categoryId !== "") query.categoryId = payload.categoryId;
+      if (this.search !== "") query.search = payload.search;
+      if (this.price !== "") query.price = payload.price;
+      if (this.difficulty !== "") query.difficulty = payload.difficulty;
+
+      this.$router
+        .push({
+          query: Object.assign({}, this.$route.query, query),
+        })
+        .catch(() => {});
+
       this.$store
         .dispatch("fetchCoursesUser", payload)
         .then((result) => {
