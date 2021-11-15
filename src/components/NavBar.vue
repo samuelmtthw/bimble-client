@@ -4,7 +4,7 @@
       <router-link to="/"><h1>BIMBLE</h1></router-link>
       <div class="navLinks d-flex flex-row">
         <router-link to="/"><h6>Home</h6></router-link>
-        <router-link to="/courses" v-if="role === 'User'"
+        <router-link to="/courses" v-if="!(isLoggedIn && role !== 'User')"
           ><h6>Courses</h6></router-link
         >
         <router-link to="/my-courses" v-if="isLoggedIn && role === 'User'"
