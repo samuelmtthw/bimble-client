@@ -36,6 +36,8 @@ const routes = [
       if (localStorage.getItem("access_token")) {
         if (store.state.role !== "User") {
           next({ path: "/" });
+        } else {
+          next();
         }
       } else {
         next();
@@ -51,6 +53,8 @@ const routes = [
       if (localStorage.getItem("access_token")) {
         if (store.state.role !== "User") {
           next({ path: "/" });
+        } else {
+          next();
         }
       } else {
         next();

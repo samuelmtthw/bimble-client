@@ -15,6 +15,28 @@
           </div>
           <strong>Description</strong>
           <p>{{ course.description }}</p>
+          <form class="d-flex justify-content-between">
+            <input
+              type="text"
+              placeholder="Add a comment"
+              class="form-control w-75 d-inline-block"
+            />
+            <div class="w-25 d-flex justify-content-end">
+              <button class="btn d-inline-block class w-75">Send</button>
+            </div>
+          </form>
+          <div
+            class="container"
+            v-for="comment in displayed.Comments"
+            :key="comment.id"
+          >
+            <div class="comment">
+              <div class="text">
+                <a class="username">{{ comment.User.name }}</a>
+                <span>{{ comment.comment }}</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-3">
           <button

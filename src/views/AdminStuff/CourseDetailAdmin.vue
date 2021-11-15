@@ -8,12 +8,19 @@
         <div class="col-9">
           <h3>{{ course.name }}</h3>
           <hr />
-          <div class="d-flex justify-content-between">
-            <strong>{{ displayed.name }}</strong>
-            <button class="btn btn-danger" @click="deleteVideo(displayed.id)">
-              Delete Video
-            </button>
-          </div>
+
+          <strong>{{ displayed.name }}</strong
+          ><br />
+          <button class="btn btn-back my-1" @click="updateVideo(displayed.id)">
+            Update Video
+          </button>
+          <button
+            class="btn btn-danger my-1 mx-3"
+            @click="deleteVideo(displayed.id)"
+          >
+            Delete Video
+          </button>
+
           <br />
           <div class="videoContainer mt-1 mb-3">
             <iframe :src="displayed.videoUrl" frameborder="0"></iframe>
@@ -60,6 +67,9 @@ export default {
     };
   },
   methods: {
+    updateVideo(videoId) {
+      this.$router.push(`/update-video/${videoId}`);
+    },
     deleteVideo(videoId) {
       Swal.fire({
         title: "Are you sure?",
