@@ -302,22 +302,14 @@ export default new Vuex.Store({
     },
     createCourseAdmin(
       context,
-      { name, description, price, thumbnailUrl, difficulty, CategoryId }
+      payload
     ) {
       return new Promise((resolve, reject) => {
         axios({
           method: "POST",
           url: "/admin/courses",
           headers: { access_token: localStorage.getItem("access_token") },
-          data: {
-            name,
-            description,
-            price,
-            thumbnailUrl,
-            difficulty,
-            CategoryId,
-            status: "active",
-          },
+          data: payload
         })
           .then(({ data }) => {
             resolve(data);

@@ -2,22 +2,35 @@
   <section id="AddCourse" class="stationary-page d-flex justify-content-center">
     <div class="wrapper d-flex justify-content-center">
       <div class="card p-5 rounded">
-        <form @submit.prevent="addCourse" class="d-flex flex-column">
+        <form @submit.prevent="addCourse" enctype="multipart/form-data" class="d-flex flex-column">
           <h2 class="mb-4">Add Course</h2>
           <label>Name </label>
-          <input type="text" v-model="name" class="form-control mb-3" />
+          <input 
+          type="text" 
+          name="name" 
+          class="form-control mb-3" />
 
           <label>Description</label>
-          <textarea v-model="description" class="form-control mb-3" />
+          <textarea 
+          name="description" 
+          class="form-control mb-3" />
 
           <label>Price</label>
-          <input type="number" v-model="price" class="form-control mb-3" />
+          <input 
+          type="number" 
+          name="price" 
+          class="form-control mb-3" />
 
           <label>Thumbnail URL </label>
-          <input type="name" v-model="thumbnailUrl" class="form-control mb-3" />
+          <input 
+          type="name" 
+          name="thumbnailUrl" 
+          class="form-control mb-3" />
 
           <label>Difficulty </label>
-          <select v-model="difficulty" class="form-select mb-3">
+          <select 
+          name="difficulty" 
+          class="form-select mb-3">
             <option value="" disabled>Select Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -25,7 +38,9 @@
           </select>
 
           <label>Category </label>
-          <select v-model="CategoryId" class="form-select mb-3">
+          <select 
+          name="CategoryId" 
+          class="form-select mb-3">
             <option value="" disabled>Select Category</option>
             <option
               v-for="category in categories"
@@ -47,6 +62,8 @@
             </label>
             <input
               type="file"
+              accept="video/mp4,video/x-m4v,video/*"
+              name="Videos"
               @change="addVideo($event, k)"
               title="test"
               :id="`addFileButton${k}`"
@@ -56,7 +73,7 @@
               <button
                 class="btn btn-danger"
                 @click.prevent="remove(k)"
-                v-show="k || (!k && videos.length > 1)"
+                v-show="k || (!k && videos.length > 0)"
               >
                 Remove
               </button>
@@ -64,7 +81,7 @@
               <button
                 class="btn btn-create mt-2"
                 @click.prevent="add(k)"
-                v-show="k == videos.length - 1"
+                v-show="k == videos.length - 1 && videos.length !== 3"
               >
                 Add fields
               </button>
@@ -93,37 +110,19 @@ export default {
   name: "AddCourse",
   data: function () {
     return {
-      name: "",
-      description: "",
-      price: "",
-      thumbnailUrl: "",
-      difficulty: "",
-      CategoryId: "",
       videos: [{ file: "" }],
       categories: [],
     };
   },
   methods: {
-    addCourse() {
-      const payload = {
-        name: this.name,
-        description: this.description,
-        price: this.price,
-        thumbnailUrl: this.thumbnailUrl,
-        difficulty: this.difficulty,
-        CategoryId: this.CategoryId,
-        Videos: this.videos,
-      };
-      console.log(this.videos, "INI VIDEOS");
-      console.log(payload);
+    addCourse(e) {
+      const createdCourse = new FormData(e.target);
       this.$store
-        .dispatch("createCourseAdmin", payload)
-        .then((result) => {
-          console.log(result);
-          this.$router.push("/admin");
+      .dispatch("createCourseAdmin", createdCourse)
+        .then(() => {
+          this.$router.push("/courses");
         })
         .catch((err) => {
-          console.log(err, "INI ERROR ADDCOURSE");
           const message = err.message.join(", ");
           alertError(message);
         });
@@ -133,20 +132,20 @@ export default {
       this.videos.push({
         file: "",
       });
-      console.log(this.videos);
     },
     remove(index) {
       this.videos.splice(index, 1);
     },
     addVideo(event, index) {
-      this.videos[index].file = event.target.files[0];
+      if (index < 3) {
+        this.videos[index].file = event.target.files[0];
+      }
     },
   },
   created() {
     this.$store
       .dispatch("fetchCategoriesAdmin")
       .then((result) => {
-        console.log(result);
         this.categories = result;
       })
       .catch((err) => {
