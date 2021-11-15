@@ -457,7 +457,7 @@ export default new Vuex.Store({
           method: "PATCH",
           url: `/admin/videos/${videoId}`,
           headers: { access_token: localStorage.getItem("access_token") },
-          data: { name }
+          data: { name },
         })
           .then(({ data }) => {
             resolve(data);

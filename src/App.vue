@@ -10,7 +10,7 @@
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
 import { mapMutations } from "vuex";
-import { alertError } from "./apis/swal";
+// import { alertError } from "./apis/swal";
 
 export default {
   name: "App",
@@ -24,10 +24,10 @@ export default {
       setRole: "SET_ROLE",
     }),
   },
-  created() {
+  /* async created() {
     if (localStorage.getItem("access_token")) {
       this.setLogin(true);
-      this.$store
+      await this.$store
         .dispatch("fetchUserDetail")
         .then((result) => {
           this.setRole(result.role);
@@ -42,6 +42,7 @@ export default {
         });
     }
   },
+  */
 };
 </script>
 
