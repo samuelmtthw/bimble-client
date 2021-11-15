@@ -18,6 +18,7 @@ import UpdateCourse from "@/views/AdminStuff/UpdateCourse.vue";
 
 import UpdateUser from "@/views/UserStuff/UpdateUser.vue";
 import store from "../store";
+import { alertError } from "../apis/swal";
 
 Vue.use(VueRouter);
 
@@ -232,6 +233,26 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  if (localStorage.getItem("access_token")) {
+    store.commit("IS_LOGGED_IN", true);
+    await store
+      .dispatch("fetchUserDetail")
+      .then((result) => {
+        store.commit("SET_ROLE", result.role);
+      })
+      .catch((err) => {
+        alertError(err.message);
+        localStorage.removeItem("access_token");
+        store.commit("IS_LOGGED_IN", true);
+        if (to.path !== "/") {
+          next({ path: "/" });
+        }
+      });
+  }
+  next();
 });
 
 export default router;
