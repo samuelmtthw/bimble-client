@@ -44,10 +44,10 @@ export default {
       const files = new FormData(e.target);
 
       const payload = {
-        files: files,
+        file: files,
         courseId: this.$route.params.courseId,
       };
-
+      console.log(payload, "PAYLOAD");
       this.$store
         .dispatch("addVideoAdmin", payload)
         .then((result) => {

@@ -2,35 +2,26 @@
   <section id="AddCourse" class="stationary-page d-flex justify-content-center">
     <div class="wrapper d-flex justify-content-center">
       <div class="card p-5 rounded">
-        <form @submit.prevent="addCourse" enctype="multipart/form-data" class="d-flex flex-column">
+        <form
+          @submit.prevent="addCourse"
+          enctype="multipart/form-data"
+          class="d-flex flex-column"
+        >
           <h2 class="mb-4">Add Course</h2>
           <label>Name </label>
-          <input 
-          type="text" 
-          name="name" 
-          class="form-control mb-3" />
+          <input type="text" name="name" class="form-control mb-3" />
 
           <label>Description</label>
-          <textarea 
-          name="description" 
-          class="form-control mb-3" />
+          <textarea name="description" class="form-control mb-3" />
 
           <label>Price</label>
-          <input 
-          type="number" 
-          name="price" 
-          class="form-control mb-3" />
+          <input type="number" name="price" class="form-control mb-3" />
 
           <label>Thumbnail URL </label>
-          <input 
-          type="name" 
-          name="thumbnailUrl" 
-          class="form-control mb-3" />
+          <input type="name" name="thumbnailUrl" class="form-control mb-3" />
 
           <label>Difficulty </label>
-          <select 
-          name="difficulty" 
-          class="form-select mb-3">
+          <select name="difficulty" class="form-select mb-3">
             <option value="" disabled>Select Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -38,9 +29,7 @@
           </select>
 
           <label>Category </label>
-          <select 
-          name="CategoryId" 
-          class="form-select mb-3">
+          <select name="CategoryId" class="form-select mb-3">
             <option value="" disabled>Select Category</option>
             <option
               v-for="category in categories"
@@ -71,7 +60,7 @@
             />
             <span>
               <button
-                class="btn btn-danger"
+                class="btn btn-danger mt-2"
                 @click.prevent="remove(k)"
                 v-show="k || (!k && videos.length > 0)"
               >
@@ -118,7 +107,7 @@ export default {
     addCourse(e) {
       const createdCourse = new FormData(e.target);
       this.$store
-      .dispatch("createCourseAdmin", createdCourse)
+        .dispatch("createCourseAdmin", createdCourse)
         .then(() => {
           this.$router.push("/courses");
         })

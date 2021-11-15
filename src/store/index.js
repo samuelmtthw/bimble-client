@@ -300,16 +300,13 @@ export default new Vuex.Store({
           });
       });
     },
-    createCourseAdmin(
-      context,
-      payload
-    ) {
+    createCourseAdmin(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
           method: "POST",
           url: "/admin/courses",
           headers: { access_token: localStorage.getItem("access_token") },
-          data: payload
+          data: payload,
         })
           .then(({ data }) => {
             resolve(data);
