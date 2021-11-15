@@ -164,6 +164,37 @@ export default new Vuex.Store({
           });
       });
     },
+    fetchUserCourseRating(context, courseId) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: `/public/ratingUser/${courseId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
+    addUserCourseRating(context, { courseId, rating }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "POST",
+          url: `/public/ratings/${courseId}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: { rating },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
     // * done
     fetchUserCourseUser() {
       return new Promise((resolve, reject) => {
