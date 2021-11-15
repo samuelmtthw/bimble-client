@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { alertError } from "@/apis/swal.js";
+import { alertError, alertLoading, LoadingDone } from "../../apis/swal";
 
 export default {
   name: "AddCourse",
@@ -106,9 +106,11 @@ export default {
   methods: {
     addCourse(e) {
       const createdCourse = new FormData(e.target);
+      alertLoading();
       this.$store
         .dispatch("createCourseAdmin", createdCourse)
         .then(() => {
+          LoadingDone();
           this.$router.push("/courses");
         })
         .catch((err) => {

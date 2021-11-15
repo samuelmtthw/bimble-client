@@ -15,25 +15,34 @@
           </div>
           <strong>Description</strong>
           <p>{{ course.description }}</p>
-          <form class="d-flex justify-content-between">
-            <input
-              type="text"
-              placeholder="Add a comment"
-              class="form-control w-75 d-inline-block"
-            />
-            <div class="w-25 d-flex justify-content-end">
-              <button class="btn d-inline-block class w-75">Send</button>
-            </div>
-          </form>
-          <div
-            class="container"
-            v-for="comment in displayed.Comments"
-            :key="comment.id"
-          >
-            <div class="comment">
-              <div class="text">
-                <a class="username">{{ comment.User.name }}</a>
-                <span>{{ comment.comment }}</span>
+          <strong>Comments ({{ displayed.Comments.length }}):</strong>
+          <div class="card">
+            <form
+              @submit.prevent="addCommentUser"
+              class="d-flex justify-content-between card-body"
+            >
+              <input
+                type="text"
+                placeholder="Add a comment"
+                class="form-control w-75 d-inline-block"
+                v-model="comment"
+              />
+              <div class="w-25 d-flex justify-content-end">
+                <button type="submit" class="btn d-inline-block class w-75">
+                  Send
+                </button>
+              </div>
+            </form>
+            <div
+              class="container"
+              v-for="comment in displayed.Comments"
+              :key="comment.id"
+            >
+              <div class="card-body">
+                <div class="text">
+                  <p class="card-title">{{ comment.User.name }}</p>
+                  <h5>{{ comment.comment }}</h5>
+                </div>
               </div>
             </div>
           </div>
@@ -67,6 +76,7 @@ export default {
       course: {},
       displayed: {},
       index: 0,
+      comment: "",
     };
   },
   methods: {
@@ -85,6 +95,21 @@ export default {
         .catch((err) => {
           alertError(err.message);
           this.$router.push("/my-courses");
+        });
+    },
+    addCommentUser() {
+      const payload = {
+        videoId: this.displayed.id,
+        comment: this.comment,
+      };
+
+      this.$store
+        .dispatch("addCommentUser", payload)
+        .then(() => {
+          this.fetchUserCourseDetail();
+        })
+        .catch((err) => {
+          alertError(err.message);
         });
     },
   },

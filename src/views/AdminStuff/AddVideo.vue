@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { alertError, alertSuccess } from "../../apis/swal";
+import { alertError, alertLoading, LoadingDone } from "../../apis/swal";
+
 export default {
   name: "AddVideo",
   data: function () {
@@ -48,10 +49,11 @@ export default {
         courseId: this.$route.params.courseId,
       };
       console.log(payload, "PAYLOAD");
+      alertLoading();
       this.$store
         .dispatch("addVideoAdmin", payload)
-        .then((result) => {
-          alertSuccess(result);
+        .then(() => {
+          LoadingDone();
           this.$router.push("/admin");
         })
         .catch((err) => {
