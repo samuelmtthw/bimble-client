@@ -10,18 +10,18 @@
           <div class="videoContainer">
             <iframe :src="video.videoUrl" frameborder="0"></iframe>
             <iframe
-              src="https://www.youtube.com/embed/TIa4iHmyaBI"
+              :src="video.videoUrl"
               frameborder="0"
             ></iframe>
           </div>
           <span class="mt-3">Video Title</span>
-          <input type="text" v-model="name" class="form-control mb-3 mt-1" />
+          <input type="text" v-model="video.name" class="form-control mb-3 mt-1" />
 
           <input type="submit" value="Edit" class="btn form-control mt-3" />
 
           <router-link
             class="btn btn-back mt-2"
-            :to="`/admin/course/${this.$route.params.videoId}`"
+            :to="`/admin/course/${video.CourseId}`"
           >
             Back
           </router-link>
@@ -32,28 +32,44 @@
 </template>
 
 <script>
+import { alertError } from "@/apis/swal.js";
 export default {
   name: "UpdateVideo",
   data: function () {
     return {
-      name: "",
       video: {
+        name: "",
         videoUrl: "",
-      },
+        CourseId: ""
+      }
     };
   },
   methods: {
     updateVideo() {
       const payload = {
-        name: this.name,
-        videoId: this.$store.params.videoId,
+        name: this.video.name,
+        videoId: this.$route.params.videoId,
       };
-      console.log(payload);
-
-      // this.$store.dispatch('updateVideoAdmin',payload)
+      this.$store.dispatch('updateVideoAdmin', payload)
+        .then(() => {
+          this.$router.push(`/admin/course/${this.video.CourseId}`);
+        })
+        .catch((err) => {
+          const message = err.message.join(", ");
+          alertError(message);
+        });
     },
   },
-  created() {},
+  created() {
+    this.$store
+      .dispatch("readVideoDetail", this.$route.params.videoId)
+      .then((result) => {
+        this.video = result;
+      })
+      .catch((err) => {
+        alertError(err.message);
+      });
+  },
 };
 </script>
 

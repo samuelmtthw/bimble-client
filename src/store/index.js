@@ -420,6 +420,21 @@ export default new Vuex.Store({
       });
     },
     //  ----------------- Videos -----------------
+    readVideoDetail(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: `/admin/videos/${payload}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
+      });
+    },
     addVideoAdmin(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
@@ -436,13 +451,13 @@ export default new Vuex.Store({
           });
       });
     },
-    updateVideoAdmin(context, payload) {
+    updateVideoAdmin(context, { name, videoId }) {
       return new Promise((resolve, reject) => {
         axios({
           method: "PATCH",
-          url: `/admin/videos/${payload.videoId}`,
+          url: `/admin/videos/${videoId}`,
           headers: { access_token: localStorage.getItem("access_token") },
-          data: payload,
+          data: { name }
         })
           .then(({ data }) => {
             resolve(data);
