@@ -13,6 +13,7 @@
             v-model="name"
             placeholder="John Doe"
             class="form-control mb-3"
+            required
           />
           <label><span>E-mail</span></label>
           <input
@@ -20,6 +21,7 @@
             v-model="email"
             placeholder="john@mail.com"
             class="form-control mb-3"
+            required
           />
           <label><span>Password</span></label>
           <input
@@ -27,6 +29,7 @@
             v-model="password"
             placeholder="********"
             class="form-control mb-4"
+            required
           />
 
           <input type="submit" value="Register" class="form-control my-3 btn" />
@@ -70,7 +73,6 @@ export default {
         .catch((err) => {
           alertError(err.message);
         });
-      console.log(payload);
     },
   },
 };

@@ -51,16 +51,20 @@
           <strong class="d-block mb-1"
             >Comments for this video ({{ comments.length }}):</strong
           >
-          <div
-            class="card container"
-            v-for="comment in comments"
-            :key="comment.id"
-          >
-            <div class="card-body">
-              <div class="text">
-                <h6 class="card-title">{{ comment.User.name }}</h6>
-                <p>{{ comment.comment }}</p>
-              </div>
+          <div class="card p-3">
+            <div
+              v-for="(comment, idx) in comments"
+              :key="comment.id"
+              :class="
+                idx > 0
+                  ? idx === comments.length - 1
+                    ? 'border-top pt-3'
+                    : 'border-top pt-3 mb-3'
+                  : 'mb-3'
+              "
+            >
+              <p class="mb-1">{{ comment.User.name }}</p>
+              <h6 class="mb-0">{{ comment.comment }}</h6>
             </div>
           </div>
         </div>

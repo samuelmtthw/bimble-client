@@ -9,19 +9,29 @@
         >
           <h2 class="mb-4">Add Course</h2>
           <label>Name </label>
-          <input type="text" name="name" class="form-control mb-3" />
+          <input type="text" name="name" class="form-control mb-3" required />
 
           <label>Description</label>
-          <textarea name="description" class="form-control mb-3" />
+          <textarea name="description" class="form-control mb-3" required />
 
           <label>Price</label>
-          <input type="number" name="price" class="form-control mb-3" />
+          <input
+            type="number"
+            name="price"
+            class="form-control mb-3"
+            required
+          />
 
           <label>Thumbnail URL </label>
-          <input type="name" name="thumbnailUrl" class="form-control mb-3" />
+          <input
+            type="url"
+            name="thumbnailUrl"
+            class="form-control mb-3"
+            required
+          />
 
           <label>Difficulty </label>
-          <select name="difficulty" class="form-select mb-3">
+          <select name="difficulty" class="form-select mb-3" required>
             <option value="" disabled>Select Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -29,7 +39,7 @@
           </select>
 
           <label>Category </label>
-          <select name="CategoryId" class="form-select mb-3">
+          <select name="CategoryId" class="form-select mb-3" required>
             <option value="" disabled>Select Category</option>
             <option
               v-for="category in categories"
@@ -50,6 +60,7 @@
               >{{ videos[k].file.name }}
             </label>
             <input
+              required
               type="file"
               accept="video/mp4,video/x-m4v,video/*"
               name="Videos"

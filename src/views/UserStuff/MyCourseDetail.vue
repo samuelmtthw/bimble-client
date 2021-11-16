@@ -36,11 +36,13 @@
           </div>
           <strong>Description</strong>
           <p>{{ course.description }}</p>
-          <strong>Comments ({{ displayed.Comments.length }}):</strong>
-          <div class="card">
+          <strong
+            >Comments for this video ({{ displayed.Comments.length }}):</strong
+          >
+          <div class="card p-3">
             <form
               @submit.prevent="addCommentUser"
-              class="d-flex justify-content-between card-body"
+              class="d-flex justify-content-between mb-3"
             >
               <input
                 type="text"
@@ -49,22 +51,21 @@
                 v-model="comment"
               />
               <div class="w-25 d-flex justify-content-end">
-                <button type="submit" class="btn d-inline-block class w-75">
+                <button
+                  type="submit"
+                  class="btn active d-inline-block class w-75"
+                >
                   Send
                 </button>
               </div>
             </form>
             <div
-              class="container"
               v-for="comment in displayed.Comments"
               :key="comment.id"
+              class="border-top pt-3 mb-3"
             >
-              <div class="card-body">
-                <div class="text">
-                  <p class="card-title">{{ comment.User.name }}</p>
-                  <h5>{{ comment.comment }}</h5>
-                </div>
-              </div>
+              <p class="mb-1">{{ comment.User.name }}</p>
+              <h6 class="mb-0">{{ comment.comment }}</h6>
             </div>
           </div>
         </div>

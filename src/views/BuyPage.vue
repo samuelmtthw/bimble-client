@@ -11,6 +11,7 @@
         <form @submit.prevent="buy" class="d-flex flex-column mt-3">
           <span>Enter your phone number (OVO)</span>
           <input
+            required
             type="number"
             placeholder="+628123456789"
             class="form-control mt-1"

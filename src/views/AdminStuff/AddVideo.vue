@@ -10,6 +10,7 @@
           <h2 class="mb-4">Add Video</h2>
           <label>Video</label>
           <input
+            required
             type="file"
             accept="video/mp4,video/x-m4v,video/*"
             name="Videos"

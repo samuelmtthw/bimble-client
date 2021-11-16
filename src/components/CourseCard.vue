@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="`/courses/${course.id}`">
+  <router-link
+    :to="`/courses/${course.id}`"
+    data-aos="fade-up"
+    data-aos-duration="600"
+  >
     <div class="CourseCard card p-3">
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
@@ -79,6 +83,7 @@ export default {
   transition-duration: 150ms;
   border-width: 2px;
   border-color: #eee;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.1);
 }
 
 .CourseCard img {
