@@ -3,7 +3,7 @@
     <div class="wrapper d-flex">
       <!-- <span class="float-end"><a href="#">Back to top</a> </span> -->
       <span
-        >&copy; 2021 <strong>BIMBLE ID</strong> &middot; About &middot;
+        >&copy; 2021 <strong>bimble</strong> &middot; About &middot;
         Our-team</span
       >
     </div>
@@ -18,17 +18,10 @@ export default {
 
 <style>
 footer {
-  background-color: #a3d2ca;
+  background-color: #fc7901;
 }
 
-footer {
-  color: #eb5e0b;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
 footer strong {
-  color: #eb5e0b;
   font-family: "Poppins", sans-serif;
   font-weight: 900;
   font-style: italic;

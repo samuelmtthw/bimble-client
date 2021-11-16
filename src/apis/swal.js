@@ -23,7 +23,7 @@ function alertError(message) {
 function alertLoading() {
   Swal.fire({
     title: "Please Wait!",
-    html: "Uploading data",
+    html: "Processing...",
     allowEscapeKey: false,
     allowOutsideClick: false,
     showConfirmButton: false,
@@ -35,6 +35,10 @@ function alertLoading() {
 
 function LoadingDone() {
   Swal.fire("Finished !!", "Upload success", "success");
+}
+
+function swalDone() {
+  Swal.close();
 }
 
 // getMyRecipes() {
@@ -51,4 +55,4 @@ function LoadingDone() {
 //   swalLoading(loading);
 // },
 
-export { alertSuccess, alertError, alertLoading, LoadingDone };
+export { alertSuccess, alertError, alertLoading, LoadingDone, swalDone };
