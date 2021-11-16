@@ -95,7 +95,7 @@ export default {
         page: this.page,
       };
 
-      if (this.search !== "") query.search = this.search;
+      query.search = this.search;
 
       this.$router
         .push({
