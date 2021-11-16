@@ -11,6 +11,7 @@
             v-model="search"
             class="form-control d-inline-block mx-1"
             placeholder="Course Name"
+            @change="setQueryParams"
           />
           <input type="submit" value="Search" class="btn addButton" />
         </form>
@@ -66,6 +67,7 @@ export default {
     changePage(event) {
       const targetPage = event.target.innerHTML;
       this.page = targetPage;
+      this.setQueryParams()
       this.fetchCoursesAdmin();
     },
     fetchCoursesAdmin() {
@@ -74,29 +76,44 @@ export default {
         search: this.search,
       };
 
-      let query = {
-        page: this.page,
-      };
-
-      if (this.search !== "") query.search = payload.search;
-      this.$router
-        .push({
-          query: Object.assign({}, this.$route.query, query),
-        })
-        .catch(() => {});
-
       this.$store
         .dispatch("fetchCoursesAdmin", payload)
         .then((result) => {
           this.courses = result.course;
           this.totalPage = result.totalPage;
+          if(JSON.parse(JSON.stringify(this.courses)).length === 0) {
+            this.page = 1
+            this.setQueryParams()
+          }
         })
         .catch((err) => {
           alertError(err.message);
         });
     },
+    setQueryParams() {
+      let query = {
+        page: this.page,
+      };
+
+      if (this.search !== "") query.search = this.search;
+
+      this.$router
+        .push({
+          query: Object.assign({}, this.$route.query, query),
+        })
+        .catch(() => {});
+      this.fetchCoursesAdmin()
+    },
+
+    getQueryParams() {
+      const { page, search:name } = this.$route.query;
+
+      this.page = page || 1
+      this.search = name
+    }
   },
   created() {
+    this.getQueryParams()
     this.fetchCoursesAdmin();
   },
   components: {

@@ -17,6 +17,7 @@
               name="categoryId"
               :value="category.id"
               v-model="categoryId"
+              @change="setQueryParams"
             /><label class="d-inline-block">{{ category.name }}</label>
           </div>
           <h5 class="mt-4">Difficulty</h5>
@@ -26,6 +27,7 @@
               name="difficulty"
               value="easy"
               v-model="difficulty"
+              @change="setQueryParams"
             />
             <label class="d-inline-block">Easy</label>
           </div>
@@ -35,6 +37,7 @@
               name="difficulty"
               value="medium"
               v-model="difficulty"
+              @change="setQueryParams"
             />
             <label class="d-inline-block">Medium</label>
           </div>
@@ -44,16 +47,29 @@
               name="difficulty"
               value="hard"
               v-model="difficulty"
+              @change="setQueryParams"
             />
             <label class="d-inline-block">Hard</label>
           </div>
           <h5 class="mt-4">Order By Price</h5>
           <div class="category mt-2">
-            <input type="radio" name="price" value="asc" v-model="price" />
+            <input
+              type="radio"
+              name="price"
+              value="asc"
+              v-model="price"
+              @change="setQueryParams"
+            />
             <label class="d-inline-block">Low to High</label>
           </div>
           <div class="category mt-2">
-            <input type="radio" name="price" value="desc" v-model="price" />
+            <input
+              type="radio"
+              name="price"
+              value="desc"
+              v-model="price"
+              @change="setQueryParams"
+            />
             <label class="d-inline-block">High to Low</label>
           </div>
           <h5 class="mt-4">Search</h5>
@@ -62,6 +78,7 @@
               type="search"
               name="orderBy"
               v-model="search"
+              @change="setQueryParams"
               class="form-control mb-3"
               placeholder="Course Name"
             />
@@ -119,6 +136,7 @@ export default {
     changePage(event) {
       const targetPage = event.target.innerHTML;
       this.page = targetPage;
+      this.setQueryParams();
       this.fetchCoursesUser();
     },
     clear() {
@@ -126,6 +144,7 @@ export default {
       this.categoryId = "";
       this.price = "";
       this.difficulty = "";
+      this.$router.replace({ name: "Courses" }).catch(() => {});
     },
     fetchCategoriesUser() {
       this.$store
@@ -146,14 +165,30 @@ export default {
         difficulty: this.difficulty,
       };
 
+      this.$store
+        .dispatch("fetchCoursesUser", payload)
+        .then((result) => {
+          this.courses = result.course;
+          this.totalPage = result.totalPage;
+          console.log(JSON.parse(JSON.stringify(this.courses)).length);
+          if(JSON.parse(JSON.stringify(this.courses)).length === 0) {
+            this.page = 1
+            this.setQueryParams()
+          }
+        })
+        .catch((err) => {
+          alertError(err.message);
+        });
+    },
+    setQueryParams() {
       let query = {
         page: this.page,
       };
 
-      if (this.categoryId !== "") query.categoryId = payload.categoryId;
-      if (this.search !== "") query.search = payload.search;
-      if (this.price !== "") query.price = payload.price;
-      if (this.difficulty !== "") query.difficulty = payload.difficulty;
+      if (this.categoryId !== "") query.categoryId = this.categoryId;
+      if (this.search !== "") query.search = this.search;
+      if (this.price !== "") query.price = this.price;
+      if (this.difficulty !== "") query.difficulty = this.difficulty;
 
       this.$router
         .push({
@@ -161,18 +196,27 @@ export default {
         })
         .catch(() => {});
 
-      this.$store
-        .dispatch("fetchCoursesUser", payload)
-        .then((result) => {
-          this.courses = result.course;
-          this.totalPage = result.totalPage;
-        })
-        .catch((err) => {
-          alertError(err.message);
-        });
+      this.fetchCoursesUser();
+    },
+
+    getQueryParams() {
+      const {
+        categoryId,
+        page,
+        price,
+        difficulty,
+        search: name,
+      } = this.$route.query;
+
+      this.page = page || 1;
+      this.categoryId = categoryId;
+      this.difficulty = difficulty;
+      this.price = price;
+      this.search = name;
     },
   },
   created() {
+    this.getQueryParams();
     this.fetchCoursesUser();
     this.fetchCategoriesUser();
   },
