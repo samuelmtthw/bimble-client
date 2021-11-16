@@ -246,7 +246,7 @@ router.beforeEach(async (to, from, next) => {
       .catch((err) => {
         alertError(err.message);
         localStorage.removeItem("access_token");
-        store.commit("IS_LOGGED_IN", true);
+        store.commit("IS_LOGGED_IN", false);
         if (to.path !== "/") {
           next({ path: "/" });
         }
