@@ -16,6 +16,7 @@
             type="text"
             v-model="video.name"
             class="form-control mb-3 mt-1"
+            required
           />
 
           <input type="submit" value="Edit" class="btn form-control mt-3" />

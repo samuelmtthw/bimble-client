@@ -9,10 +9,16 @@
           <h2 class="mb-4">Update Course</h2>
 
           <span>Course Name </span>
-          <input type="text" v-model="name" class="form-control mb-3" />
+          <input
+            required
+            type="text"
+            v-model="name"
+            class="form-control mb-3"
+          />
 
           <span>Description </span>
           <textarea
+            required
             v-model="description"
             cols="30"
             rows="10"
@@ -20,13 +26,23 @@
           />
 
           <span>Price </span>
-          <input type="number" v-model="price" class="form-control mb-3" />
+          <input
+            required
+            type="number"
+            v-model="price"
+            class="form-control mb-3"
+          />
 
           <span>Thumbnail URL </span>
-          <input type="url" v-model="thumbnailUrl" class="form-control mb-3" />
+          <input
+            required
+            type="url"
+            v-model="thumbnailUrl"
+            class="form-control mb-3"
+          />
 
           <span>Difficulty </span>
-          <select v-model="difficulty" class="form-select mb-3">
+          <select required v-model="difficulty" class="form-select mb-3">
             <option value="" disabled>Select Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -34,7 +50,7 @@
           </select>
 
           <span>Category </span>
-          <select v-model="CategoryId" class="form-select mb-3">
+          <select required v-model="CategoryId" class="form-select mb-3">
             <option value="" disabled>Select Category</option>
             <option
               v-for="category in categories"

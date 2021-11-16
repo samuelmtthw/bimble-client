@@ -10,6 +10,7 @@
             v-model="email"
             placeholder="john@mail.com"
             class="form-control mb-3"
+            required
           />
           <label><span>Password</span></label>
           <input
@@ -17,6 +18,7 @@
             v-model="password"
             placeholder="********"
             class="form-control mb-4"
+            required
           />
 
           <input type="submit" value="Log In" class="form-control btn mt-3" />

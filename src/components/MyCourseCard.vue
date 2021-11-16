@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="`/my-courses/${courseId}`">
+  <router-link
+    :to="`/my-courses/${courseId}`"
+    data-aos="fade-up"
+    data-aos-duration="600"
+  >
     <div class="MyCourseCard card p-3">
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
@@ -15,7 +19,6 @@ export default {
   props: ["course", "courseId"],
   methods: {
     toDetails() {
-      console.log(this.courseId);
       this.$router.push(`/my-courses/${this.courseId}`);
     },
   },
@@ -51,6 +54,7 @@ export default {
   transition-duration: 150ms;
   border-width: 2px;
   border-color: #eee;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.1);
 }
 
 .MyCourseCard img {
