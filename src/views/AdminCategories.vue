@@ -49,7 +49,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import { alertError, alertSuccess } from "../apis/swal";
+import { alertError, alertSuccess, alertLoading, swalDone } from "../apis/swal";
 export default {
   name: "AdminCategories",
   data() {
@@ -89,6 +89,7 @@ export default {
       this.showForm = status;
     },
     createCategoryAdmin() {
+      alertLoading();
       this.$store
         .dispatch("createCategoryAdmin", { name: this.name })
         .then((result) => {
@@ -100,10 +101,12 @@ export default {
         });
     },
     fetchCategoriesAdmin() {
+      alertLoading();
       this.$store
         .dispatch("fetchCategoriesAdmin")
         .then((result) => {
           this.categories = result;
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -122,20 +125,20 @@ export default {
 }
 
 #AdminCourses .categoryButton {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #AdminCourses .categoryButton:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #AdminCourses .cancelButton {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;

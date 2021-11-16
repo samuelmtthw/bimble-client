@@ -1,7 +1,7 @@
 <template>
   <nav class="d-flex justify-content-center">
     <div class="wrapper d-flex justify-content-between align-items-center">
-      <router-link to="/"><h1>BIMBLE</h1></router-link>
+      <router-link to="/"><h3>bimble</h3></router-link>
       <div class="navLinks d-flex flex-row">
         <router-link to="/"><h6>Home</h6></router-link>
         <router-link to="/courses" v-if="!(isLoggedIn && role !== 'User')"
@@ -47,20 +47,18 @@ export default {
 
 <style>
 nav {
-  background-color: #a3d2ca;
+  background-color: #fc7901;
 }
 
-nav h1 {
-  font-weight: 900;
-  font-style: italic;
-  color: #eb5e0b;
+nav h3 {
+  font-weight: 700;
+  color: #ffffff;
 }
 
 nav h6 {
   font-weight: 400;
   font-weight: 600;
-  font-style: italic;
-  color: #eb5e0b;
+  color: #ffffff;
 }
 
 .navLinks {
@@ -73,6 +71,6 @@ nav h6 {
 }
 .navLinks a:hover {
   cursor: pointer;
-  border-bottom: 3px solid #eb5e0b;
+  border-bottom: 3px solid #ffffff;
 }
 </style>

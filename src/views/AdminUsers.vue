@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { alertError } from "../apis/swal";
+import { alertError, alertLoading, swalDone } from "../apis/swal";
 export default {
   name: "AdminUsers",
   data: function () {
@@ -32,10 +32,12 @@ export default {
   },
   methods: {
     fetchUsersFromAdmin() {
+      alertLoading();
       this.$store
         .dispatch("fetchUsersFromAdmin")
         .then((result) => {
           this.users = result;
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);

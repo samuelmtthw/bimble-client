@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { alertSuccess, alertError } from "../apis/swal";
+import { alertSuccess, alertError, alertLoading } from "../apis/swal";
 import GoogleButton from "@/components/GoogleButton.vue";
 
 export default {
@@ -58,6 +58,7 @@ export default {
         email: this.email,
         password: this.password,
       };
+      alertLoading();
       this.$store
         .dispatch("loginUser", payload)
         .then((result) => {
@@ -85,6 +86,7 @@ export default {
 <style>
 #LoginPage .card {
   min-width: 600px;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.18);
 }
 
 #LoginPage span {
@@ -93,14 +95,14 @@ export default {
 }
 
 #LoginPage .btn {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #LoginPage .btn:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #LoginPage .googleButton {

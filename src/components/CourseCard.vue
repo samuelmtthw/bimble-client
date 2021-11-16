@@ -81,9 +81,9 @@ export default {
   margin: 0 0 15px 15px;
   border-radius: 15px;
   transition-duration: 150ms;
-  border-width: 2px;
-  border-color: #eee;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.1);
+  border-width: 1px;
+  border-color: #ffffff;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.18);
 }
 
 .CourseCard img {
@@ -91,13 +91,13 @@ export default {
 }
 
 .CourseCard strong {
-  color: #eb5e0b;
+  color: #fc7901;
   font-size: 1.2em;
 }
 
 .CourseCard span {
-  color: #eb5e0b;
-  background-color: #a3d2ca;
+  color: #fff;
+  background-color: #fc7901;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
@@ -108,6 +108,6 @@ export default {
 }
 
 .CourseCard:hover {
-  border-color: #a3d2ca;
+  border-color: #fc7901;
 }
 </style>
