@@ -67,7 +67,7 @@ export default {
     changePage(event) {
       const targetPage = event.target.innerHTML;
       this.page = targetPage;
-      this.setQueryParams()
+      this.setQueryParams();
       this.fetchCoursesAdmin();
     },
     fetchCoursesAdmin() {
@@ -81,9 +81,9 @@ export default {
         .then((result) => {
           this.courses = result.course;
           this.totalPage = result.totalPage;
-          if(JSON.parse(JSON.stringify(this.courses)).length === 0) {
-            this.page = 1
-            this.setQueryParams()
+          if (JSON.parse(JSON.stringify(this.courses)).length === 0) {
+            this.page = 1;
+            this.setQueryParams();
           }
         })
         .catch((err) => {
@@ -102,18 +102,18 @@ export default {
           query: Object.assign({}, this.$route.query, query),
         })
         .catch(() => {});
-      this.fetchCoursesAdmin()
+      this.fetchCoursesAdmin();
     },
 
     getQueryParams() {
-      const { page, search:name } = this.$route.query;
+      const { page, search: name } = this.$route.query;
 
-      this.page = page || 1
-      this.search = name
-    }
+      this.page = page || 1;
+      this.search = name;
+    },
   },
   created() {
-    this.getQueryParams()
+    this.getQueryParams();
     this.fetchCoursesAdmin();
   },
   components: {

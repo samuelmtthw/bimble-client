@@ -171,9 +171,9 @@ export default {
           this.courses = result.course;
           this.totalPage = result.totalPage;
           console.log(JSON.parse(JSON.stringify(this.courses)).length);
-          if(JSON.parse(JSON.stringify(this.courses)).length === 0) {
-            this.page = 1
-            this.setQueryParams()
+          if (JSON.parse(JSON.stringify(this.courses)).length === 0) {
+            this.page = 1;
+            this.setQueryParams();
           }
         })
         .catch((err) => {
