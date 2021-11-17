@@ -1,10 +1,7 @@
 <template>
   <footer class="d-flex justify-content-center">
-    <div class="wrapper d-flex">
-      <!-- <span class="float-end"><a href="#">Back to top</a> </span> -->
-      <router-link to="/about" class="white-text"
-        ><strong>bimble</strong> &copy; 2021 &middot; About
-      </router-link>
+    <div class="wrapper d-flex justify-content-center align-items-center">
+      <strong> &copy; 2021 BIMBLE</strong>
     </div>
   </footer>
 </template>
@@ -22,15 +19,8 @@ footer {
 
 footer strong {
   font-family: "Poppins", sans-serif;
-  font-weight: 900;
+  font-weight: 800;
   font-style: italic;
-}
-
-.white-text {
   color: white;
-}
-.white-text strong {
-  font-size: large;
-  bottom: 0;
 }
 </style>

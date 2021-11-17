@@ -4,6 +4,9 @@
       <router-link to="/"><h3>bimble</h3></router-link>
       <div class="navLinks d-flex flex-row">
         <router-link to="/"><h6>Home</h6></router-link>
+        <router-link to="/about">
+          <h6>About Us</h6>
+        </router-link>
         <router-link to="/courses" v-if="!(isLoggedIn && role !== 'User')"
           ><h6>Courses</h6></router-link
         >

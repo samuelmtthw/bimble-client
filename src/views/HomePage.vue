@@ -30,11 +30,19 @@
             Be Humble
           </h5>
         </div>
+        <a
+          href="#journey"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay="1600"
+          ><i class="fas fa-chevron-down fa-2x orange mt-5"></i
+        ></a>
       </header>
       <header
         class="row align-items-center"
         data-aos="fade-up"
         data-aos-duration="600"
+        id="journey"
       >
         <div class="col-6">
           <img src="/home_assets/assets1.png" alt="" class="w-100" />
@@ -49,18 +57,17 @@
           "
         >
           <h1>Start your journey</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt vero
-            neque facere consectetur quam itaque optio error consequatur. Vitae
-            voluptates ut officiis placeat illum optio mollitia fugiat maxime
-            labore recusandae.
+          <p class="text-center text-muted">
+            "A journey of a thousand miles begins with a single step" <br />Take
+            your first step with <strong>bimble</strong>, and we'll help you to
+            reach your 1000th miles.
           </p>
           <a href="#learn" class="btn">Learn More</a>
         </div>
       </header>
 
       <div class="row">
-        <a name="learn" />
+        <a name="learn"></a>
         <div
           class="col-6 d-flex justify-content-center flex-column"
           data-aos="fade-right"
@@ -68,19 +75,17 @@
         >
           <h1>Perfect Content</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores,
-            nisi repellendus nihil qui consequuntur cupiditate doloribus eveniet
-            labore, provident, sed voluptatem sequi. Excepturi cumque ad
-            ratione, animi dolorum ex fuga!
+            You can choose and select the content fitted for you. Search for
+            difficulty levels, topics, and price points to fit your needs.
           </p>
-          <router-link to="/courses" class="btn">Join Us</router-link>
+          <router-link to="/register" class="btn">Join Us</router-link>
         </div>
         <div class="col-6">
           <img
             src="/home_assets/assets2.png"
             alt=""
             class="w-100"
-            data-aos="fade-right"
+            data-aos="fade-left"
             data-aos-duration="600"
           />
         </div>
@@ -187,6 +192,9 @@ export default {
   width: 1440px;
   padding: 0 36px;
 }
+#HomePage strong {
+  color: #fc7901;
+}
 
 #HomePage .titleText {
   font-size: 5em;
@@ -210,6 +218,10 @@ export default {
 
 #HomePage .btn:hover {
   background-color: #eb5e0b;
+}
+
+#HomePage .orange {
+  color: #fc7901;
 }
 
 /* #HomePage h1 {
@@ -247,9 +259,7 @@ export default {
   background-color: #eb5e0b;
   color: #ffffff;
 }
-#HomePage .orange {
-  color: #fc7901;
-}
+
 #HomePage .teal {
   color: #a3d2ca;
 }

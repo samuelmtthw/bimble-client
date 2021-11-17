@@ -4,7 +4,7 @@
     data-aos="fade-up"
     data-aos-duration="600"
   >
-    <div class="MyCourseCard card p-3">
+    <div class="MyCourseCard card p-3 shadow">
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
       </div>
@@ -54,7 +54,6 @@ export default {
   transition-duration: 150ms;
   border-width: 1px;
   border-color: #ffffff;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.18);
 }
 
 .MyCourseCard img {

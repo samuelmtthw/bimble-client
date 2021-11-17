@@ -10,12 +10,12 @@
             data-aos-delay="600"
           >
             <h1 class="display-4">About us</h1>
-            <p class="lead text-muted mb-0">
+            <p class="text-muted">
               “None of us, including me, ever do great things. But we can all do
               small things, with great love, and together we can do something
               wonderful.”<br />
-              <small>Mother Teresa</small>
             </p>
+            <span>- Mother Teresa</span>
           </div>
           <div
             class="col-lg-6 d-none d-lg-block"
@@ -40,7 +40,7 @@
             class="col-lg-6 order-2 order-lg-1"
             data-aos="fade-down"
             data-aos-duration="600"
-            data-aos-delay="1800"
+            data-aos-delay="600"
           >
             <i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
             <h2 class="font-weight-light">
@@ -52,13 +52,15 @@
               just a work. It's all about the love, the love we put in our
               product and we believe it shows.
             </p>
-            <a href="#" class="tombol">Learn More</a>
+            <!-- <router-link to="/courses">
+              <a href="#" class="tombol">Learn More</a>
+            </router-link> -->
           </div>
           <div
             class="col-lg-5 px-5 mx-auto order-1 order-lg-2"
             data-aos="fade-up"
             data-aos-duration="600"
-            data-aos-delay="2400"
+            data-aos-delay="1200"
           >
             <img
               src="../../public/about_assets/work.svg"
@@ -122,7 +124,7 @@
                 class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               />
               <h5 class="mb-0">Vina Eka Laylani</h5>
-              <span class="small text-uppercase text-muted">CEO - Founder</span>
+
               <ul class="social mb-0 list-inline mt-3">
                 <li class="list-inline-item">
                   <a href="https://github.com/vinaekalaylani" class="tombol"
@@ -148,7 +150,7 @@
                 class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               />
               <h5 class="mb-0">Samuel Matthew</h5>
-              <span class="small text-uppercase text-muted">CEO - Founder</span>
+
               <ul class="social mb-0 list-inline mt-3">
                 <li class="list-inline-item">
                   <a href="#" class="social-link"
@@ -176,7 +178,7 @@
                 class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               />
               <h5 class="mb-0">Bernhard Winner</h5>
-              <span class="small text-uppercase text-muted">CEO - Founder</span>
+
               <ul class="social mb-0 list-inline mt-3">
                 <li class="list-inline-item">
                   <a href="#" class="social-link"
@@ -212,7 +214,7 @@
                 "
               />
               <h5 class="mb-0">Colin Maximillion Halim</h5>
-              <span class="small text-uppercase text-muted">CEO - Founder</span>
+
               <ul class="social mb-0 list-inline mt-3">
                 <li class="list-inline-item">
                   <a href="#" class="social-link"
@@ -242,7 +244,7 @@
                 class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               />
               <h5 class="mb-0">Surya Aji Santosa</h5>
-              <span class="small text-uppercase text-muted">CEO - Founder</span>
+
               <ul class="social mb-0 list-inline mt-3">
                 <li class="list-inline-item">
                   <a href="#" class="social-link"
