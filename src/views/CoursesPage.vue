@@ -196,8 +196,6 @@ export default {
           query: Object.assign({}, this.$route.query, query),
         })
         .catch(() => {});
-
-      this.fetchCoursesUser();
     },
 
     getQueryParams() {
