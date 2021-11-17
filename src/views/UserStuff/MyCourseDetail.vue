@@ -89,7 +89,12 @@
 </template>
 
 <script>
-import { alertError, alertSuccess } from "../../apis/swal";
+import {
+  alertError,
+  alertSuccess,
+  alertLoading,
+  swalDone,
+} from "../../apis/swal";
 
 export default {
   name: "MyCourseDetail",
@@ -111,6 +116,7 @@ export default {
         courseId: this.$route.params.courseId,
         rating: this.rating,
       };
+      alertLoading();
       this.$store
         .dispatch("addUserCourseRating", payload)
         .then((result) => {
@@ -128,12 +134,14 @@ export default {
       this.index = idx;
     },
     fetchUserCourseDetail() {
+      alertLoading();
       this.$store
         .dispatch("fetchUserCourseDetail", this.$route.params)
         .then((result) => {
           this.course = result.Course;
           this.displayed = result.Course.Videos[0];
           this.index = 0;
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -149,7 +157,9 @@ export default {
       this.$store
         .dispatch("addCommentUser", payload)
         .then(() => {
+          this.comment = "";
           this.fetchUserCourseDetail();
+          this.fetchUserCourseRating();
         })
         .catch((err) => {
           alertError(err.message);
@@ -179,7 +189,7 @@ export default {
 
 <style>
 #MyCourseDetail h3 {
-  color: #eb5e0b;
+  color: #fc7901;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
   font-style: italic;
@@ -190,8 +200,8 @@ export default {
 }
 
 #MyCourseDetail span {
-  color: #eb5e0b;
-  background-color: #a3d2ca;
+  color: #fff;
+  background-color: #fc7901;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
@@ -218,28 +228,28 @@ export default {
 }
 
 #MyCourseDetail .btn {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #6c757d;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #MyCourseDetail .btn:hover {
-  background-color: #8fcac0;
+  background-color: #5c636a;
 }
 
 #MyCourseDetail .active {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
 }
 #MyCourseDetail .active:hover {
-  background-color: #ce5109;
-  color: #f8f1f1;
+  background-color: #eb5e0b;
+  color: #ffffff;
 }
 
 #MyCourseDetail .btn-back {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 #MyCourseDetail .btn-back:hover {
   background-color: #5c636a;

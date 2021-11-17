@@ -82,10 +82,12 @@ export default {
 
 <style>
 .detailsButton {
-  background-color: #a3d2ca;
+  background-color: #fc7901;
+  color: #fff;
 }
 
 .detailsButton:hover {
-  background-color: #8fcac0;
+  background-color: #eb5e0b;
+  color: #fff;
 }
 </style>

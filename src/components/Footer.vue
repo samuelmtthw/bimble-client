@@ -1,11 +1,7 @@
 <template>
   <footer class="d-flex justify-content-center">
-    <div class="wrapper d-flex">
-      <!-- <span class="float-end"><a href="#">Back to top</a> </span> -->
-      <span
-        >&copy; 2021 <strong>BIMBLE ID</strong> &middot; About &middot;
-        Our-team</span
-      >
+    <div class="wrapper d-flex justify-content-center align-items-center">
+      <strong> &copy; 2021 BIMBLE</strong>
     </div>
   </footer>
 </template>
@@ -18,19 +14,13 @@ export default {
 
 <style>
 footer {
-  background-color: #a3d2ca;
+  background-color: #fc7901;
 }
 
-footer {
-  color: #eb5e0b;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
 footer strong {
-  color: #eb5e0b;
   font-family: "Poppins", sans-serif;
-  font-weight: 900;
+  font-weight: 800;
   font-style: italic;
+  color: white;
 }
 </style>

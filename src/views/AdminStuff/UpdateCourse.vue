@@ -72,7 +72,12 @@
 </template>
 
 <script>
-import { alertError, alertSuccess } from "../../apis/swal";
+import {
+  alertError,
+  alertSuccess,
+  alertLoading,
+  swalDone,
+} from "../../apis/swal";
 export default {
   name: "UpdateCourse",
   data: function () {
@@ -97,7 +102,7 @@ export default {
         CategoryId: this.CategoryId,
         courseId: this.$route.params.courseId,
       };
-
+      alertLoading();
       this.$store
         .dispatch("editCourseAdmin", payload)
         .then((result) => {
@@ -109,6 +114,7 @@ export default {
         });
     },
     fetchCoursesDetailAdmin() {
+      alertLoading();
       this.$store
         .dispatch("fetchCoursesDetailAdmin", {
           courseId: this.$route.params.courseId,
@@ -120,6 +126,7 @@ export default {
           this.thumbnailUrl = result.thumbnailUrl;
           this.difficulty = result.difficulty;
           this.CategoryId = result.CategoryId;
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -155,18 +162,18 @@ export default {
 }
 
 #UpdateCourse .btn {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #UpdateCourse .btn:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 #UpdateCourse .btn-back {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 #UpdateCourse .btn-back:hover {
   background-color: #5c636a;

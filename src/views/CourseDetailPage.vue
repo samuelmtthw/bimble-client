@@ -10,9 +10,9 @@
             <h3>{{ course.name }}</h3>
             <strong> {{ price }}</strong>
             <h6 class="mt-2">Rating</h6>
-            <span>{{ rating }}</span>
+            <span class="btn">{{ rating }}</span>
             <h6 class="mt-2">Difficulty</h6>
-            <span>{{ difficulty }}</span>
+            <span class="btn">{{ difficulty }}</span>
           </div>
           <hr />
           <strong class="d-block mb-3">Want full access?</strong>
@@ -38,7 +38,6 @@
                 :class="
                   idx === 0 ? 'btn w-100 mb-1' : 'btn w-100 mb-1 disabled'
                 "
-                disabled
               >
                 {{ video.name }}
               </span>
@@ -74,7 +73,7 @@
 </template>
 
 <script>
-import { alertError } from "../apis/swal";
+import { alertError, swalDone, alertLoading } from "../apis/swal";
 export default {
   name: "CourseDetailPage",
   data: function () {
@@ -103,13 +102,16 @@ export default {
     },
 
     fetchCourseDetailUser() {
+      alertLoading();
       this.$store
         .dispatch("fetchCoursesDetailUser", this.$route.params)
         .then((result) => {
           this.course = result;
           if (result.Videos[0]) {
+            swalDone();
             this.comments = result.Videos[0].Comments;
           } else {
+            swalDone();
             this.comments = [];
           }
         })
@@ -157,7 +159,7 @@ export default {
 }
 
 #CourseDetail h3 {
-  color: #eb5e0b;
+  color: #fc7901;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
   font-style: italic;
@@ -168,8 +170,8 @@ export default {
 }
 
 #CourseDetail span {
-  color: #eb5e0b;
-  background-color: #a3d2ca;
+  color: #fff;
+
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
@@ -196,20 +198,20 @@ export default {
 }
 
 #CourseDetail .btn {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #CourseDetail button.btn:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #CourseDetail .disabled {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 
 * {
@@ -230,7 +232,7 @@ h6 {
 }
 
 body {
-  background-color: #f8f1f1;
+  background-color: #ffffff;
 }
 
 a {
@@ -245,7 +247,7 @@ a {
 .stationary-page {
   max-width: 100vw;
 
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 145px);
   padding: 20px 0;
 }
 </style>

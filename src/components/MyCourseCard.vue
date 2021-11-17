@@ -4,7 +4,7 @@
     data-aos="fade-up"
     data-aos-duration="600"
   >
-    <div class="MyCourseCard card p-3">
+    <div class="MyCourseCard card p-3 shadow">
       <div class="imgContainer">
         <img :src="course.thumbnailUrl" alt="Thumbnail" class="w-100 mb-3" />
       </div>
@@ -52,9 +52,8 @@ export default {
   margin: 0 15px 15px 0;
   border-radius: 15px;
   transition-duration: 150ms;
-  border-width: 2px;
-  border-color: #eee;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.1);
+  border-width: 1px;
+  border-color: #ffffff;
 }
 
 .MyCourseCard img {
@@ -62,7 +61,7 @@ export default {
 }
 
 .MyCourseCard h5 {
-  color: #eb5e0b;
+  color: #fc7901;
 
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -70,6 +69,6 @@ export default {
 }
 
 .MyCourseCard:hover {
-  border-color: #a3d2ca;
+  border-color: #fc7901;
 }
 </style>

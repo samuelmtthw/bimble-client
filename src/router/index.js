@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "@/views/HomePage.vue";
+import AboutPage from "@/views/AboutPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import CoursesPage from "@/views/CoursesPage.vue";
@@ -28,6 +29,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: HomePage,
+  },
+  {
+    path: "/about",
+    name: "AboutPage",
+    component: AboutPage,
   },
   {
     path: "/courses",
@@ -233,6 +239,9 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
 });
 
 router.beforeEach(async (to, from, next) => {
@@ -246,7 +255,7 @@ router.beforeEach(async (to, from, next) => {
       .catch((err) => {
         alertError(err.message);
         localStorage.removeItem("access_token");
-        store.commit("IS_LOGGED_IN", true);
+        store.commit("IS_LOGGED_IN", false);
         if (to.path !== "/") {
           next({ path: "/" });
         }

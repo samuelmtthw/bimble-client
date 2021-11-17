@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { alertError, alertSuccess } from "../apis/swal";
+import { alertError, alertLoading, alertSuccess, swalDone } from "../apis/swal";
 export default {
   name: "BuyPage",
   data: function () {
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     buy() {
+      alertLoading();
       this.$store
         .dispatch("addUserCourseUser", this.$route.params)
         .then((result) => {
@@ -52,9 +53,7 @@ export default {
           this.$store
             .dispatch("ovoCharge", payload)
             .then(() => {
-              alertSuccess(
-                `Course ${this.course.name} is added! Please check the notification on your phone. To check your courses, open 'My Course' page. `
-              );
+              alertSuccess(`Purchased!`);
               this.$router.push("/my-courses");
             })
             .catch((err) => {
@@ -67,10 +66,12 @@ export default {
         });
     },
     fetchCoursesDetailUser() {
+      alertLoading();
       this.$store
         .dispatch("fetchCoursesDetailUser", this.$route.params)
         .then((result) => {
           this.course = result;
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -110,17 +111,18 @@ export default {
 }
 
 #BuyPage .btn-orange {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+
+  color: #ffffff;
 }
 
 #BuyPage .btn-orange:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #BuyPage .btn-back {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 #BuyPage .btn-back:hover {
   background-color: #5c636a;

@@ -71,24 +71,23 @@ export default {
 
 <style>
 #AdminPage .navButton {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #6c757d;
+  color: #fff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #AdminPage .navButton:hover {
-  background-color: #8fcac0;
-  color: #eb5e0b;
+  background-color: #5c636a;
 }
 
 #AdminPage .active {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
 }
 #AdminPage .active:hover {
-  background-color: #ce5109;
-  color: #f8f1f1;
+  background-color: #eb5e0b;
+  color: #ffffff;
 }
 </style>
