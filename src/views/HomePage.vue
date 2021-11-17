@@ -59,7 +59,7 @@
           <h1>Start your journey</h1>
           <p class="text-center text-muted">
             "A journey of a thousand miles begins with a single step" <br />Take
-            your first step with <strong>bimble</strong>, and we'll help you to
+            your first step with <strong>bimble</strong>, and we'll help you
             reach your 1000th miles.
           </p>
           <a href="#learn" class="btn">Learn More</a>
@@ -74,7 +74,7 @@
           data-aos-duration="600"
         >
           <h1>Perfect Content</h1>
-          <p>
+          <p class="text-muted">
             You can choose and select the content fitted for you. Search for
             difficulty levels, topics, and price points to fit your needs.
           </p>

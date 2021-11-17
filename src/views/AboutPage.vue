@@ -200,18 +200,10 @@
           >
             <div class="bg-white rounded shadow-sm py-5 px-4">
               <img
-                src="../../public/Colin.jpg"
-                alt="picture of Colin"
-                width="75"
-                max-height="75"
-                class="
-                  img-fluid
-                  rounded-circle
-                  mb-3
-                  img-thumbnail
-                  shadow-sm
-                  full-height
-                "
+                src="../../public/colin.jpg"
+                alt=""
+                width="100"
+                class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               />
               <h5 class="mb-0">Colin Maximillion Halim</h5>
 
