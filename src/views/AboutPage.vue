@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="AboutPage">
     <div class="bg-light">
       <div class="container py-5">
         <div class="row h-100 align-items-center py-5">
@@ -9,7 +9,7 @@
             data-aos-duration="600"
             data-aos-delay="600"
           >
-            <h1 class="display-4">About us</h1>
+            <h1>About us</h1>
             <p class="text-muted">
               “None of us, including me, ever do great things. But we can all do
               small things, with great love, and together we can do something
@@ -102,41 +102,11 @@
     </div>
 
     <div class="bg-light py-5">
-      <div class="container py-5">
-        <div class="row mb-4">
-          <div class="col-lg-5">
-            <h2 class="display-4 font-weight-light">Our team</h2>
-          </div>
+      <div class="container">
+        <div class="row mb-5">
+          <h1 class="text-center">Our Team</h1>
         </div>
-
-        <div class="row text-center">
-          <!-- Team item-->
-          <div
-            class="col-xl-3 col-sm-6 mb-5"
-            data-aos="fade-in"
-            data-aos-duration="600"
-          >
-            <div class="bg-white rounded shadow-sm py-5 px-4">
-              <img
-                src="../../public/Vina.jpeg"
-                alt=""
-                width="100"
-                class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
-              />
-              <h5 class="mb-0">Vina Eka Laylani</h5>
-
-              <ul class="social mb-0 list-inline mt-3">
-                <li class="list-inline-item">
-                  <a href="https://github.com/vinaekalaylani" class="tombol"
-                    >GitHub</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- End-->
-
-          <!-- Team item-->
+        <div class="row text-center d-flex flex-wrap justify-content-center">
           <div
             class="col-xl-3 col-sm-6 mb-5"
             data-aos="fade-in"
@@ -162,6 +132,33 @@
               </ul>
             </div>
           </div>
+          <!-- End-->
+        </div>
+        <div class="row text-center d-flex flex-wrap justify-content-center">
+          <div
+            class="col-xl-3 col-sm-6 mb-5"
+            data-aos="fade-in"
+            data-aos-duration="600"
+          >
+            <div class="bg-white rounded shadow-sm py-5 px-4">
+              <img
+                src="../../public/Vina.jpeg"
+                alt=""
+                width="100"
+                class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
+              />
+              <h5 class="mb-0">Vina Eka Laylani</h5>
+
+              <ul class="social mb-0 list-inline mt-3">
+                <li class="list-inline-item">
+                  <a href="https://github.com/vinaekalaylani" class="tombol"
+                    >GitHub</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <!-- End-->
 
           <!-- Team item-->
@@ -200,18 +197,10 @@
           >
             <div class="bg-white rounded shadow-sm py-5 px-4">
               <img
-                src="../../public/Colin.jpg"
-                alt="picture of Colin"
-                width="75"
-                max-height="75"
-                class="
-                  img-fluid
-                  rounded-circle
-                  mb-3
-                  img-thumbnail
-                  shadow-sm
-                  full-height
-                "
+                src="../../public/colin.jpg"
+                alt=""
+                width="100"
+                class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
               />
               <h5 class="mb-0">Colin Maximillion Halim</h5>
 
@@ -282,11 +271,18 @@ export default {
   margin-right: 5px;
 }
 
+.tombol:hover {
+  background-color: #eb5e0b;
+}
 .icon {
   color: #fc7901;
 }
 
 .margin-top {
   margin-top: 150px;
+}
+
+#AboutPage a {
+  color: #fff;
 }
 </style>
