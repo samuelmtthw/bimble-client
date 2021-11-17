@@ -2,10 +2,9 @@
   <footer class="d-flex justify-content-center">
     <div class="wrapper d-flex">
       <!-- <span class="float-end"><a href="#">Back to top</a> </span> -->
-      <span
-        >&copy; 2021 <strong>bimble</strong> &middot; About &middot;
-        Our-team</span
-      >
+      <router-link to="/about" class="white-text"
+        ><strong>bimble</strong> &copy; 2021 &middot; About
+      </router-link>
     </div>
   </footer>
 </template>
@@ -25,5 +24,13 @@ footer strong {
   font-family: "Poppins", sans-serif;
   font-weight: 900;
   font-style: italic;
+}
+
+.white-text {
+  color: white;
+}
+.white-text strong {
+  font-size: large;
+  bottom: 0;
 }
 </style>

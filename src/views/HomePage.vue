@@ -75,8 +75,14 @@
           </p>
           <router-link to="/courses" class="btn">Join Us</router-link>
         </div>
-        <div class="col-6" data-aos="fade-left" data-aos-duration="600">
-          <img src="/home_assets/assets2.png" alt="" class="w-100" />
+        <div class="col-6">
+          <img
+            src="/home_assets/assets2.png"
+            alt=""
+            class="w-100"
+            data-aos="fade-right"
+            data-aos-duration="600"
+          />
         </div>
       </div>
     </div>
@@ -178,6 +184,7 @@ export default {
   padding: 0 !important;
 }
 #HomePage .wrapper {
+  width: 1440px;
   padding: 0 36px;
 }
 
