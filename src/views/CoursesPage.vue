@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import { alertError } from "../apis/swal";
+import { alertError, alertLoading, swalDone } from "../apis/swal";
 import CourseCard from "../components/CourseCard.vue";
 
 export default {
@@ -164,17 +164,18 @@ export default {
         price: this.price,
         difficulty: this.difficulty,
       };
-
+      alertLoading();
       this.$store
         .dispatch("fetchCoursesUser", payload)
         .then((result) => {
           this.courses = result.course;
           this.totalPage = result.totalPage;
-          console.log(JSON.parse(JSON.stringify(this.courses)).length);
           if (JSON.parse(JSON.stringify(this.courses)).length === 0) {
             this.page = 1;
             this.setQueryParams();
+            swalDone();
           }
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -195,8 +196,6 @@ export default {
           query: Object.assign({}, this.$route.query, query),
         })
         .catch(() => {});
-
-      this.fetchCoursesUser();
     },
 
     getQueryParams() {
@@ -232,18 +231,18 @@ export default {
 }
 
 #CoursesPage input[type="submit"] {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 #CoursesPage input[type="submit"]:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #CoursesPage button {
-  color: #f8f1f1;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;

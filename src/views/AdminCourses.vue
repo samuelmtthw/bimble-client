@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { alertError } from "../apis/swal";
+import { alertError, alertLoading, swalDone } from "../apis/swal";
 import CourseRow from "@/components/CourseRow.vue";
 
 export default {
@@ -75,7 +75,7 @@ export default {
         page: this.page,
         search: this.search,
       };
-
+      alertLoading();
       this.$store
         .dispatch("fetchCoursesAdmin", payload)
         .then((result) => {
@@ -84,7 +84,9 @@ export default {
           if (JSON.parse(JSON.stringify(this.courses)).length === 0) {
             this.page = 1;
             this.setQueryParams();
+            swalDone();
           }
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -124,15 +126,15 @@ export default {
 
 <style>
 #AdminCourses .addButton {
-  color: #f8f1f1;
-  background-color: #eb5e0b;
+  color: #ffffff;
+  background-color: #fc7901;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #AdminCourses .addButton:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #AdminCourses table th {

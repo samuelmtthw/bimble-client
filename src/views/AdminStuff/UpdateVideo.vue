@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import { alertError } from "@/apis/swal.js";
-import { alertSuccess } from "../../apis/swal";
+import { alertError, alertLoading } from "@/apis/swal.js";
+import { alertSuccess, swalDone } from "../../apis/swal";
 export default {
   name: "UpdateVideo",
   data: function () {
@@ -53,6 +53,7 @@ export default {
         name: this.video.name,
         videoId: this.$route.params.videoId,
       };
+      alertLoading();
       this.$store
         .dispatch("updateVideoAdmin", payload)
         .then(() => {
@@ -66,9 +67,11 @@ export default {
     },
   },
   created() {
+    alertLoading();
     this.$store
       .dispatch("readVideoDetail", this.$route.params.videoId)
       .then((result) => {
+        swalDone();
         this.video = result;
       })
       .catch((err) => {
@@ -102,19 +105,19 @@ export default {
 }
 
 #UpdateVideo .btn {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #UpdateVideo .btn:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 #UpdateVideo .btn-back {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 #UpdateVideo .btn-back:hover {
   background-color: #5c636a;

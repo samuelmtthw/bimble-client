@@ -169,20 +169,20 @@ export default {
 }
 
 #AddCourse .btn-create {
-  background-color: #eb5e0b;
-  color: #f8f1f1;
+  background-color: #fc7901;
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #AddCourse .btn-create:hover {
-  background-color: #ce5109;
+  background-color: #eb5e0b;
 }
 
 #AddCourse .btn-back {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 
 #AddCourse .btn-back:hover {

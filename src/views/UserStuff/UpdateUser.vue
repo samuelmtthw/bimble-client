@@ -24,7 +24,12 @@
 </template>
 
 <script>
-import { alertError, alertSuccess } from "../../apis/swal";
+import {
+  alertError,
+  alertSuccess,
+  alertLoading,
+  swalDone,
+} from "../../apis/swal";
 export default {
   name: "UpdateUser",
   data: function () {
@@ -39,7 +44,7 @@ export default {
         name: this.name,
         email: this.email,
       };
-
+      alertLoading();
       this.$store
         .dispatch("updateUserDetail", payload)
         .then(() => {
@@ -51,11 +56,13 @@ export default {
         });
     },
     fetchUserDetail() {
+      alertLoading();
       this.$store
         .dispatch("fetchUserDetail")
         .then((result) => {
           this.name = result.name;
           this.email = result.email;
+          swalDone();
         })
         .catch((err) => {
           alertError(err.message);
@@ -80,20 +87,20 @@ export default {
 }
 
 #UpdateUser .btn {
-  background-color: #a3d2ca;
-  color: #eb5e0b;
+  background-color: #fc7901;
+  color: #fff;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 #UpdateUser .btn:hover {
-  background-color: #8fcac0;
+  background-color: #eb5e0b;
 }
 
 #UpdateUser .btn-back {
   background-color: #6c757d;
-  color: #f8f1f1;
+  color: #ffffff;
 }
 #UpdateUser .btn-back:hover {
   background-color: #5c636a;
